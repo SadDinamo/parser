@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="d-flex">
+    <h1 style="color:grey" class="mx-auto mt-2">Welcome Screen</h1>
+</div>
+
+<div id="carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner d-flex">
+        <div class="carousel-item active">
+            <img src="{% static 'media/images/welcome-1.jpeg' %}" style="height: 75vh" class="d-block img-fluid mx-auto" alt="img-1">
+        </div>
+        <div class="carousel-item h-25">
+            <img src="{% static 'media/images/welcome-2.jpeg' %}" style="height: 75vh" class="d-block img-fluid mx-auto" alt="img-2">
+        </div>
+        <div class="carousel-item h-25">
+            <img src="{% static 'media/images/welcome-3.jpg' %}" style="height: 75vh" class="d-block img-fluid mx-auto" alt="img-3">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

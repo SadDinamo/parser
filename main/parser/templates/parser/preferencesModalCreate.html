@@ -1,0 +1,30 @@
+
+<!--  Modal Preference Create  -->
+<div class="modal fade" id="createPreferenceModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="{% url 'pref_save' %}" method="post">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="yahooFinanceProgressBarModalLabel">Create new preference</h5>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group col-md-12 mt1">
+                            {{ field.label }}{{ label }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" value="OK" type="submit">
+                        <i class="fa-solid fa-floppy-disk"></i> Save
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-ban"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

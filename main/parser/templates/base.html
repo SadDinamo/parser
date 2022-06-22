@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SadDinamo parsing tks</title>
+    {% load static %}
+    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<!--   Main upper menu   -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand border border-secondary rounded-3 px-2" href="{% url 'welcome_screen' %}"><i
+                class="fa-solid fa-house"></i> Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownReports" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Stock instruments
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="{% url 'shares_list' %}">
+                                <i class="fa-solid fa-rectangle-list"></i> Shares report</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <form action="/get_tks_shares">
+                                {% csrf_token %}
+                                <button id="get-tks-shares-btn" class="dropdown-item border-0">
+                                    <i class="fa-solid fa-bolt"></i> Get tks shares
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownActions" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">News parser
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="{% url 'news_table_report' %}">
+                                <i class="fa-solid fa-rectangle-list"></i> News report</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <form action="/yahoo_parser_news">
+                                {% csrf_token %}
+                                <button id="yahoo_parser_news-btn" class="dropdown-item border-0">
+                                    <i class="fa-solid fa-bolt"></i> Parse yahoo tickers news
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="{% url 'news_key_words_list' %}">
+                                <i class="fa-solid fa-gears"></i> News key-words management</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'preferences' %}">
+                        <i class="fa-solid fa-gears"></i> Preferences</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--   Toasts section   -->
+{% if messages %}
+<div class="toast-container position-absolute top-2 end-0" style="z-index:2">
+    {% for message in messages %}
+    <div class="toast align-items-center text-white bg-{% if message.tags %}{{ message.tags }}{% endif %} border-0"
+         role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+        <div class="d-flex">
+            <div class="toast-body">
+                {{ message }}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!--  Progress bar in modal window: parsing Yahoo.Finance news  -->
+<div class="modal fade" id="yahooFinanceProgressBarModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="yahooFinanceProgressBarModalLabel">Parsing Yahoo.Finance news</h5>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                    <div id="yahooFinanceProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                         role="progressbar"
+                         style="width: 0%;" aria-valuenow="0"
+                         aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
+                <div id="yahooFinanceProgressBarLabel" class="mr-auto"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hide
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block content %}
+{% endblock %}
+
+<script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/toasts.js' %}"></script>
+<script src="{% static 'js/yahooFinanceProgressBarModal.js' %}"></script>
+
+</body>
+
+</html>

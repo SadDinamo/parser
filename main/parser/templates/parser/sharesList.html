@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="d-flex my-2">
+    <h2 class="mx-auto">Shares cards report</h2>
+</div>
+
+
+<div class="d-flex">
+    <div class="mx-auto d-flex flex-wrap justify-content-center col-10">
+        {% if is_paginated %}
+        <nav aria-label="..." class="">
+            <ul class="pagination">
+
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    {% if search %}
+                    <a class="page-link" href=" {{ request.path }}?page=1&val={{ search }}">First page</a>
+                    {% else %}
+                    <a class="page-link" href=" {{ request.path }}?page=1">First page</a>
+                    {% endif %}
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">First page</a>
+                </li>
+                {% endif %}
+
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    {% if search %}
+                    <a class="page-link" href=" {{ request.path }}?page={{ page_obj.previous_page_number }}&val={{ search }} ">&laquo</a>
+                    {% else %}
+                    <a class="page-link" href=" {{ request.path }}?page={{ page_obj.previous_page_number }} ">&laquo</a>
+                    {% endif %}
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">&laquo</a>
+                </li>
+                {% endif %}
+
+                {% for n in paginator.page_range %}
+                {% if page_obj.number == n %}
+                <li class="page-item active">
+                    {% if search %}
+                    <a class="page-link" href="{{ request.path }}?page={{ n }}&val={{ search }}">{{ n }}</a>
+                    {% else %}
+                    <a class="page-link" href="{{ request.path }}?page={{ n }}">{{ n }}</a>
+                    {% endif %}
+                </li>
+                {% elif n|add:-4 >= page_obj.number and n <= 7 %}
+                <li class="page-item">
+                    {% if search %}
+                    <a class="page-link" href="{{ request.path }}?page={{ n }}&val={{ search }}">{{ n }}</a>
+                    {% else %}
+                    <a class="page-link" href="{{ request.path }}?page={{ n }}">{{ n }}</a>
+                    {% endif %}
+                </li>
+                {% elif n|add:4 <= page_obj.number and n >= paginator.num_pages|add:-6 %}
+                <li class="page-item">
+                    {% if search %}
+                    <a class="page-link" href="{{ request.path }}?page={{ n }}&val={{ search }}">{{ n }}</a>
+                    {% else %}
+                    <a class="page-link" href="{{ request.path }}?page={{ n }}">{{ n }}</a>
+                    {% endif %}
+                </li>
+                {% elif n >= page_obj.number|add:-3 and n <= page_obj.number|add:3 %}
+                <li class="page-item">
+                    {% if search %}
+                    <a class="page-link" href="{{ request.path }}?page={{ n }}&val={{ search }}">{{ n }}</a>
+                    {% else %}
+                    <a class="page-link" href="{{ request.path }}?page={{ n }}">{{ n }}</a>
+                    {% endif %}
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    {% if search %}
+                    <a class="page-link" href=" {{ request.path }}?page={{ page_obj.next_page_number }}&val={{ search }} ">&raquo</a>
+                    {% else %}
+                    <a class="page-link" href=" {{ request.path }}?page={{ page_obj.next_page_number }} ">&raquo</a>
+                    {% endif %}
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">&raquo</a>
+                </li>
+                {% endif %}
+
+                {% if page_obj.number != paginator.num_pages %}
+                <li class="page-item">
+                    {% if search %}
+                    <a class="page-link" href=" {{ request.path }}?page={{ paginator.num_pages }}&val={{ search }} ">Last page</a>
+                    {% else %}
+                    <a class="page-link" href=" {{ request.path }}?page={{ paginator.num_pages }} ">Last page</a>
+                    {% endif %}
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">Last Page</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+        {% endif %}
+        <div class="mx-0 mx-md-2"></div>
+        <form class="d-flex mb-4 col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3">
+            <input class="form-control me-2" name="val" type="search" placeholder="Search by ticker or name" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="d-flex flex-wrap card-group">
+    {% for share in shares %}
+    <div class="col col-12 col-md-4 col-lg-3 col-xl-2 mb-2">
+        <div class="card mx-2 border-dark h-100">
+            <div class="card-header">
+                <b>{{ share.ticker }}</b><br>
+                <small>{{ share.name }}</small>
+            </div>
+            <div class="card-body">
+                <p class="card-text mb-0">Class-code: {{ share.class_code }}</p>
+                <p class="card-text mb-0">Sector: {{ share.sector}}</p>
+                <p class="card-text">Added on: {{ share.date_added}}</p>
+                <!--        <a href="#" class="btn btn-primary">Go somewhere</a>-->
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

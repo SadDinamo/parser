@@ -1,0 +1,19 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+main/db.sqlite3
+static/media
+
+# Backup files #
+*.bak
+
+# virt environment
+/venv/
+
+# git files
+/.git/
+
+# pyCharm files
+/.idea/

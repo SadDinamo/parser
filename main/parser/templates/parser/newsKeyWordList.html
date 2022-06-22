@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div id="buttonsectionwrapper" class="d-flex flex-row my-2">
+    <div>
+        <a href="{% url 'news_key_words_create' %}" class="btn btn-success mx-2">
+            <i class="fa-solid fa-sheet-plastic"></i> Add new key word
+        </a>
+    </div>
+</div>
+
+
+<div class="d-flex my-2">
+    <h2 class="mx-auto">News key word list</h2>
+</div>
+
+
+<div id="newskeywordstablewrapper" class="col col-11 col-md-7 col-lg-5 col-xl-4 col-xxl-3 mx-auto">
+    <div class="table-responsive">
+        <table id="newskeywordstable" class="table table-striped table-bordered table-sm">
+            <tbody>
+            {% for newsKeyWord in newsKeyWords %}
+            <tr>
+                <td class="d-flex flex-row fs-4"><span class="mx-2">{{ newsKeyWord.keyword }}</span>
+                    <div class="flex-grow-1"></div>
+                    <a href="{{ newsKeyWord.get_update_url }}" class="btn btn-outline-success me-2">
+                        <i class="fa-solid fa-pencil"></i> Change
+                    </a>
+                    <a href="{{ newsKeyWord.get_delete_url }}" class="btn btn-outline-danger">
+                        <i class="fa-solid fa-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'js/addNewPreferenceModal.js' %}"></script>
+
+{% endblock %}

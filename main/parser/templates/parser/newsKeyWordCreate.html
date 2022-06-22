@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="d-flex my-2">
+    <h2 class="mx-auto">New keyword creation for news parser</h2>
+</div>
+
+<div class="col col-12 d-flex justify-content-center">
+    <form action="{% url 'news_key_words_create' %}" method="post" class="d-flex flex-column justify-content-center">
+
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="form-group col-12 mb-2">
+            {{ field.label }} {{ field }}
+        </div>
+        {% endfor %}
+
+        <div class="d-flex flex-row">
+            <button class="btn btn-success col col-5 mx-auto" value="OK" type="submit">
+                <i class="fa-solid fa-floppy-disk"></i> Save
+            </button>
+            <a href="{% url 'news_key_words_list' %}" class="btn btn-secondary col col-5 mx-auto"> Go back</a>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
