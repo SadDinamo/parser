@@ -1,4 +1,3 @@
-
 <!--  Modal Preference Create  -->
 <div class="modal fade" id="createPreferenceModal" tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -14,20 +13,22 @@
                     {{ form.as_p }}
 
                     {% for field in form %}
-                        <div class="form-group col-md-12 mt1">
-                            {{ field.label }}{{ field }}
-                        </div>
+                    <div class="form-group col-md-12 mt1">
+                        {{ field.label }}{{ field }}
+                    </div>
                     {% endfor %}
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" value="OK" type="submit">
                         <i class="fa-solid fa-floppy-disk"></i> Save
                     </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <a href="{% url 'preferences' %}" class="btn btn-secondary" data-bs-dismiss="modal">
                         <i class="fa-solid fa-ban"></i> Cancel
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
+
