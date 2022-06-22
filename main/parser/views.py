@@ -97,9 +97,9 @@ class PreferencesListView(generic.ListView):
     context_object_name = 'preferences'
 
 
-class PreferenceModalFormSaveView(generic.CreateView):
+class PreferenceModalFormCreate(generic.CreateView):
     form_class = PreferenceForm
-    template_name = 'parser/preferenceModalCreate.html'
+    template_name = 'parser/preferencesModalCreate.html'
 
 
 class NewsKeyWordListView(generic.ListView):

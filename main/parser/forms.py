@@ -18,4 +18,8 @@ class PreferenceForm(forms.ModelForm):
     class Meta:
         model = Preference
         fields = '__all__'
-
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'value': forms.TextInput(attrs={'class': 'form-control'}),
+            'default_value': forms.TextInput(attrs={'class': 'form-control'}),
+        }

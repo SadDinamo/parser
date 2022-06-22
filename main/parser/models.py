@@ -71,3 +71,6 @@ class Preference(models.Model):
     value = models.CharField(verbose_name='value', max_length=40)
     default_value = models.CharField(verbose_name='default_value', max_length=40, null=True)
 
+    def get_absolute_url(self):
+        return reverse('preferences')
+

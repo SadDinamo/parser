@@ -2,7 +2,7 @@
 <!--  Modal Preference Create  -->
 <div class="modal fade" id="createPreferenceModal" tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form action="{% url 'pref_save' %}" method="post">
+    <form action="{% url 'pref_modal_save' %}" method="post">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -10,9 +10,12 @@
                 </div>
                 <div class="modal-body">
                     {% csrf_token %}
+
+                    {{ form.as_p }}
+
                     {% for field in form %}
                         <div class="form-group col-md-12 mt1">
-                            {{ field.label }}{{ label }}
+                            {{ field.label }}{{ field }}
                         </div>
                     {% endfor %}
                 </div>
