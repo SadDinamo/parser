@@ -17,3 +17,6 @@ static/media
 
 # pyCharm files
 /.idea/
+
+# django-environ
+*.env
