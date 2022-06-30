@@ -6,7 +6,7 @@ from datetime import datetime
 from django.contrib import messages
 from django.http import JsonResponse
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 import json
 
 # ***** Yahoo news Parser section *****
@@ -81,9 +81,15 @@ def parse(request):
                             title=news_item.find('title').get_text(),
                         )
                         new_news_item.save()
-                        send_mail('[Shares news parser] ' + new_news_item.title, '<a>' + new_news_item.link +
-                                  '</a>' + '\n\n' + new_news_item.description, settings.EMAIL_HOST_USER,
-                                  settings.RECIPIENT_LIST)
+
+                        send_mail('[Shares news parser] ' + new_news_item.title,
+                                  new_news_item.link + '\n\n' + new_news_item.description,
+                                  settings.EMAIL_HOST_USER,
+                                  settings.RECIPIENT_LIST,
+                                  html_message='<a href="' + new_news_item.link + '">link</a><br>' +
+                                               new_news_item.description
+                                  )
+
             current_ticker_counter += 1
             ticker_name = getTickerCode(ticker)
         else:

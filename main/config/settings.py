@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'parser',
     'fontawesomefree',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -142,5 +143,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-RECIPIENT_LIST = env('RECIPIENT_ADDRESS')
+RECIPIENT_LIST = env.tuple('RECIPIENT_ADDRESS')
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
