@@ -37,6 +37,8 @@ def getTickerCode(ticker: Share):
         ticker_corrected = ticker.ticker[:ticker.ticker.find('@')] + '.DE'
     elif ticker.class_code == 'TQBR':
         ticker_corrected = ticker.ticker + '.ME'
+    elif ticker.class_code == 'SPBHKEX':
+        ticker_corrected = ticker.ticker + '.HK'
     else:
         ticker_corrected = ''
     return ticker_corrected
