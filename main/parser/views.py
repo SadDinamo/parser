@@ -1,8 +1,9 @@
+import os
+
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views.generic import edit
 from tinkoff.invest import Client
-from tinkoff.invest.token import TOKEN
 from django.views import generic
 from .models import *
 from django.contrib import messages
@@ -11,6 +12,7 @@ from .parsers import parse, get_yahoo_ajax_progress_bar
 from .forms import PreferenceForm, NewsKeyWordForm
 from django.urls import reverse
 
+TOKEN = os.environ["INVEST_TOKEN"]
 
 class WelcomeScreen(generic.TemplateView):
     template_name = 'parser/welcomeScreen.html'

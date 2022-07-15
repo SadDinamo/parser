@@ -83,7 +83,6 @@ def parse(request):
                             title=news_item.find('title').get_text(),
                         )
                         new_news_item.save()
-
                         send_mail('[Shares news parser] ' + new_news_item.title,
                                   new_news_item.link + '\n\n' + new_news_item.description,
                                   settings.EMAIL_HOST_USER,

@@ -1,12 +1,10 @@
 from builtins import str
 from tinkoff.invest import Client
-from tinkoff.invest.token import TOKEN
 from django.db import models
 from django.urls import reverse
 from django.core import serializers
 from datetime import datetime
 from tinkoff.invest import Client
-from tinkoff.invest.token import TOKEN
 
 
 class Share(models.Model):
