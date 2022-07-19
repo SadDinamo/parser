@@ -1,7 +1,7 @@
 import requests, time
 from requests.adapters import HTTPAdapter, Retry
 from bs4 import BeautifulSoup
-from .models import News, NewsKeyWord, Share
+from .models import News, NewsKeyWord, Share, Preference
 from datetime import datetime
 from django.contrib import messages
 from django.http import JsonResponse
@@ -66,6 +66,7 @@ def parse(request):
     tickers = Share.objects.all()
     total_tickers = Share.objects.count()
     current_ticker_counter = 0
+    html_template = Preference.objects.filter(name='YahooNewsHtmlMessageTemplate').first()
     for ticker in tickers:
         xml = getHtml(getTickerCode(ticker))
         if xml.status_code == 200:  # success
@@ -83,18 +84,19 @@ def parse(request):
                             title=news_item.find('title').get_text(),
                         )
                         new_news_item.save()
+                        current_html = html_template.value.replace('\'+new_news_item.title+\'', new_news_item.title)
+                        current_html = current_html.replace('\'+new_news_item.pubDate+\'', new_news_item.pubDate)
+                        current_html = current_html.replace('\'+new_news_item.description+\'', new_news_item.description)
+                        current_html = current_html.replace('\'+new_news_item.link+\'', new_news_item.link)
                         send_mail('[Shares news parser] ' + new_news_item.title,
                                   new_news_item.link + '\n\n' + new_news_item.description,
                                   settings.EMAIL_HOST_USER,
                                   settings.RECIPIENT_LIST,
-                                  html_message='<a href="' + new_news_item.link + '">link</a><br>' +
-                                               new_news_item.description
+                                  html_message=current_html,
                                   )
-
             current_ticker_counter += 1
             ticker_name = getTickerCode(ticker)
         else:
             print('Error on server side: ' + xml.status_code)
     yahoo_ticker_update = False
     messages.add_message(request, messages.SUCCESS, 'Yahoo.Finance news info update finished')
-

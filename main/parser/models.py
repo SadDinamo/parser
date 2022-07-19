@@ -66,8 +66,12 @@ class News(models.Model):
 
 class Preference(models.Model):
     name = models.CharField(verbose_name='name', max_length=40, unique=True)
-    value = models.CharField(verbose_name='value', max_length=40)
-    default_value = models.CharField(verbose_name='default_value', max_length=40, null=True)
+    value = models.TextField(verbose_name='value')
+    default_value = models.TextField(verbose_name='default_value', null=True)
+    description = models.TextField(verbose_name='description', null=True)
+
+    class Meta:
+        ordering = ['name']
 
     def get_absolute_url(self):
         return reverse('preferences')

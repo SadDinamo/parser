@@ -132,7 +132,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # E-mails
-
 env = environ.Env()
 environ.Env.read_env()
 
@@ -143,4 +142,3 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 RECIPIENT_LIST = env.tuple('RECIPIENT_ADDRESS')
-

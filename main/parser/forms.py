@@ -20,6 +20,7 @@ class PreferenceForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'value': forms.TextInput(attrs={'class': 'form-control'}),
-            'default_value': forms.TextInput(attrs={'class': 'form-control'}),
+            'value': forms.Textarea(attrs={'class': 'form-control', 'style': 'height: 90px'}),
+            'default_value': forms.Textarea(attrs={'class': 'form-control', 'style': 'height: 90px'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'style': 'height: 90px'}),
         }
