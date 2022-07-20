@@ -6,7 +6,7 @@
 
 <div id="buttonsectionwrapper" class="d-flex flex-row my-2">
     <div>
-        <a href="{% url 'preferenceCreate' %}" id="showModalNewPreference" class="btn btn-success mx-2">
+        <a href="{% url 'preference_create' %}" id="showModalNewPreference" class="btn btn-success mx-2">
             <i class="fa-solid fa-sheet-plastic"></i> Add new preference
         </a>
     </div>
@@ -42,12 +42,12 @@
             {% for preference in preferences %}
             <tr>
                 <td class="d-flex justify-content-evenly">
-                    <button type="button" class="btn btn-outline-success">
+                    <a href="{{ preference.get_update_url }}" class="btn btn-outline-success">
                         <i class="fa-solid fa-pencil"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-danger">
+                    </a>
+                    <a href="{{ preference.get_delete_url }}" class="btn btn-outline-danger">
                         <i class="fa-solid fa-trash"></i>
-                    </button>
+                    </a>
                 </td>
                 <td><span class="fw-bold">{{ preference.name }}</span></td>
                 <td>

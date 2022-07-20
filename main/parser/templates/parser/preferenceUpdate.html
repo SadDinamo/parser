@@ -5,11 +5,11 @@
 {% block content %}
 
 <div class="d-flex my-2">
-    <h2 class="mx-auto">Create preference</h2>
+    <h2 class="mx-auto">Preference modification</h2>
 </div>
 
 <div class="col col-12 d-flex justify-content-center">
-    <form action="{% url 'preference_create' %}" method="post" class="d-flex flex-column justify-content-center">
+    <form action="{{ preference.get_update_url }}" method="post" class="d-flex flex-column justify-content-center">
 
         {% csrf_token %}
 
@@ -19,11 +19,11 @@
         </div>
         {% endfor %}
 
-        <div class="d-flex flex-row">
-            <button class="btn btn-success col col-5 mx-auto" value="OK" type="submit">
+        <div class="d-flex flex-row col col-12 justify-content-between">
+            <button class="btn btn-success " value="OK" type="submit">
                 <i class="fa-solid fa-floppy-disk"></i> Save
             </button>
-            <a href="{% url 'preferences' %}" class="btn btn-secondary col col-5 mx-auto"> Go back</a>
+            <a href="{% url 'preferences' %}" class="btn btn-secondary"> Go back</a>
         </div>
 
     </form>

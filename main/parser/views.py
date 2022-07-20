@@ -104,6 +104,20 @@ class PreferenceCreate(generic.CreateView):
     template_name = 'parser/preferenceCreate.html'
 
 
+class PreferenceUpdate(generic.UpdateView):
+    model = Preference
+    form_class = PreferenceForm
+    template_name = 'parser/preferenceUpdate.html'
+    context_object_name = 'preference'
+
+
+class PreferenceDelete(generic.DeleteView):
+    model = Preference
+    context_object_name = 'preference'
+    template_name = 'parser/preferenceDelete.html'
+    success_url = '/preferences'
+
+
 class NewsKeyWordListView(generic.ListView):
     queryset = NewsKeyWord.objects.all()
     template_name = 'parser/newsKeyWordList.html'
@@ -128,3 +142,4 @@ class NewsKeyWordsDelete(generic.DeleteView):
     context_object_name = 'news_key_word'
     template_name = 'parser/newsKeyWordDelete.html'
     success_url = '/news_key_words_list'
+

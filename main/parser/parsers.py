@@ -85,7 +85,7 @@ def parse(request):
                         )
                         new_news_item.save()
                         current_html = html_template.value.replace('\'+new_news_item.title+\'', new_news_item.title)
-                        current_html = current_html.replace('\'+new_news_item.pubDate+\'', new_news_item.pubDate)
+                        current_html = current_html.replace('\'+new_news_item.pubDate+\'', news_item.find('pubDate').get_text())
                         current_html = current_html.replace('\'+new_news_item.description+\'', new_news_item.description)
                         current_html = current_html.replace('\'+new_news_item.link+\'', new_news_item.link)
                         send_mail('[Shares news parser] ' + new_news_item.title,

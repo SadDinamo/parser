@@ -76,3 +76,9 @@ class Preference(models.Model):
     def get_absolute_url(self):
         return reverse('preferences')
 
+    def get_update_url(self):
+        return reverse('preference_update', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('preference_delete', kwargs={'pk': self.pk})
+
