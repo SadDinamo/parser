@@ -16,6 +16,7 @@ urlpatterns = [
     path('preference_create', PreferenceCreate.as_view(), name='preference_create'),
     path('preference_update/<int:pk>', PreferenceUpdate.as_view(), name='preference_update'),
     path('preference_delete/<int:pk>', PreferenceDelete.as_view(), name='preference_delete'),
+    path('preference_check_default', check_default_preferencies, name='preference_check_default'),
     path('news_key_words_list', NewsKeyWordListView.as_view(), name='news_key_words_list'),
     path('news_key_words_create', NewsKeyWordsCreate.as_view(), name='news_key_words_create'),
     path('news_key_words_update/<int:pk>', NewsKeyWordsUpdate.as_view(), name='news_key_words_update'),

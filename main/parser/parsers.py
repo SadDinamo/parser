@@ -38,7 +38,10 @@ def getTickerCode(ticker: Share):
     elif ticker.class_code == 'TQBR':
         ticker_corrected = ticker.ticker + '.ME'
     elif ticker.class_code == 'SPBHKEX':
-        ticker_corrected = ticker.ticker + '.HK'
+        if len(ticker.ticker) < 4:
+            ticker_corrected = ticker.ticker.zfill(4) + '.HK'
+        else:
+            ticker_corrected = ticker.ticker + '.HK'
     else:
         ticker_corrected = ''
     return ticker_corrected
