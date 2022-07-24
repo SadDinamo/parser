@@ -15,8 +15,8 @@
             <i class="fa-solid fa-check-to-slot"></i> Check default preferencies
         </a>
     </div>
-        <div>
-        <a href="#" class="btn btn-outline-danger mx-2">
+    <div>
+        <a href="{% url 'preferences_reset_to_defaults' %}" class="btn btn-outline-danger mx-2">
             <i class="fa-solid fa-recycle"></i> Reset to defaults
         </a>
     </div>
@@ -41,30 +41,32 @@
             <tbody>
             {% for preference in preferences %}
             <tr>
-                <td class="d-flex justify-content-evenly">
-                    <a href="{{ preference.get_update_url }}" class="btn btn-outline-success">
-                        <i class="fa-solid fa-pencil"></i>
-                    </a>
-                    <a href="{{ preference.get_delete_url }}" class="btn btn-outline-danger">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
+                <td>
+                    <div class="d-flex flex-col justify-content-evenly">
+                        <a href="{{ preference.get_update_url }}" class="btn btn-outline-success">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                        <a href="{{ preference.get_delete_url }}" class="btn btn-outline-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </div>
                 </td>
                 <td><span class="fw-bold">{{ preference.name }}</span></td>
                 <td>
-                    {% if preference.value|length > 40 %}
-                    {{ preference.value|truncatechars:40 }}
+                    {% if preference.value|length > 500 %}
+                    {{ preference.value|truncatechars:500 }}
                     {% else %}
                     {{ preference.value }}
                     {% endif %}
                 </td>
                 <td>
-                    {% if preference.default_value|length > 40 %}
-                    {{ preference.default_value|truncatechars:40 }}
+                    {% if preference.default_value|length > 500 %}
+                    {{ preference.default_value|truncatechars:500 }}
                     {% else %}
                     {{ preference.default_value }}
                     {% endif %}
                 </td>
-                <td>{{ preference.description }}</td>
+                <td class="col col-2">{{ preference.description }}</td>
             </tr>
             {% endfor %}
             </tbody>
