@@ -15,8 +15,8 @@
 <!--   Main upper menu   -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand border border-secondary rounded-3 px-2" href="{% url 'welcome_screen' %}"><i
-                class="fa-solid fa-house"></i> Home</a>
+        <a class="navbar-brand" href="{% url 'welcome_screen' %}"><i
+                class="fa-solid fa-house"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,15 +25,12 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownReports" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">Stock instruments
+                       data-bs-toggle="dropdown" aria-expanded="false">User menu
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li class="nav-item">
                             <a class="dropdown-item" href="{% url 'shares_list' %}">
                                 <i class="fa-solid fa-rectangle-list"></i> Shares report</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
                         </li>
                         <li class="nav-item">
                             <form action="/get_tks_shares">
@@ -43,19 +40,12 @@
                                 </button>
                             </form>
                         </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownActions" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">News parser
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li class="nav-item">
                             <a class="dropdown-item" href="{% url 'news_table_report' %}">
                                 <i class="fa-solid fa-rectangle-list"></i> News report</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
                         </li>
                         <li class="nav-item">
                             <form action="/yahoo_parser_news">
@@ -65,18 +55,26 @@
                                 </button>
                             </form>
                         </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
                         <li class="nav-item">
                             <a class="dropdown-item" href="{% url 'news_key_words_list' %}">
                                 <i class="fa-solid fa-gears"></i> News key-words management</a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'preferences' %}">
-                        <i class="fa-solid fa-gears"></i> Preferences</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownActions" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Admin menu
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="{% url 'preferences' %}">
+                                <i class="fa-solid fa-gears"></i> Preferences</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="{% url 'ttest' %}">
+                                <i class="fa-solid fa-microscope"></i> Test action </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
