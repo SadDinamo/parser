@@ -4,23 +4,69 @@
 
 {% block content %}
 
-<div class="d-flex">
-    <h1 style="color:grey" class="mx-auto mt-2">Welcome Screen</h1>
-</div>
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col col-auto mx-auto">
+            <h3 class="text-center text-primary">Nasdaq fails to deliver list</h3>
+            <div class="mx-2">
+                <a href="https://nasdaqtrader.com/trader.aspx?id=RegSHOThreshold" target="_blank" class="mx-2">
+                    <span class="small">link to source</span>
+                </a>
+                <table class="table table-hover table-bordered table-sm w-100">
+                    <thead>
+                    <tr class="bg-primary bg-opacity-50">
+                        <td>Ticker</td>
+                        <td>Ticker name</td>
+                        <td>Trade status</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fail in fails_to_deliver %}
+                    {% if fail.5|striptags == 'tradable' %}
+                    <tr class="table-danger">
+                        {% else %}
+                    <tr>
+                        {% endif %}
+                        <td>
+                            <a href="https://finance.yahoo.com/quote/{{ fail.0|striptags }}/key-statistics?p={{ fail.0|striptags }}"
+                               target="_blank">{{ fail.0|striptags }}</a></td>
+                        <td>{{ fail.1|striptags }}</td>
+                        <td>{{ fail.5|striptags }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-<div id="carousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner d-flex">
-        <div class="carousel-item active">
-            <img src="{% static 'media/images/welcome-1.jpeg' %}" style="height: 75vh" class="d-block img-fluid mx-auto" alt="img-1">
+        <div class="col">
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid beatae dolores error
+                exercitationem
+                incidunt inventore odio quia quis rem, repellat totam voluptate! Assumenda dolor laboriosam quisquam. Ab
+                aliquid necessitatibus sapiente.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad asperiores aut commodi cumque deleniti et,
+                fugit illo in ipsum iusto laboriosam natus nostrum quam repudiandae suscipit totam ullam ut vel.</p>
+            <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid assumenda aut cumque ea earum eos, et eum in iure maxime nam nobis praesentium quidem repellat sunt temporibus tenetur veniam.</span><span>Ab assumenda, cupiditate delectus dicta distinctio dolore, eaque eligendi ex in itaque laboriosam molestias numquam, omnis quas sint suscipit tempora totam. Aliquid ipsum laborum numquam odit quisquam sed, tempora velit.</span><span>Ab adipisci aliquam asperiores beatae corporis dolorem, doloremque facere illo inventore iure laborum non nostrum quod repellendus repudiandae rerum ut voluptatem, voluptates! Dolores labore odit provident reprehenderit! Cumque, fugit ullam!</span><span>Alias corporis deleniti dolore dolores eum explicabo illo officiis perferendis, praesentium quasi qui quibusdam. Aliquam asperiores beatae corporis dicta ex facilis, harum illum iste nostrum placeat quas quisquam quod tempore?</span><span>Amet aut, blanditiis corporis dolores dolorum earum enim, error, et expedita illo incidunt iste molestias nesciunt nostrum sed sit soluta voluptates voluptatibus. Aliquid amet assumenda illo itaque omnis rerum, vel.</span><span>Culpa cumque doloremque eaque eligendi, iusto magni molestiae nostrum optio voluptatem. Enim excepturi fugit laboriosam tempora. Architecto itaque maxime minus nam, non perspiciatis repellat velit. Cum deserunt maiores odit optio?</span><span>Ab ad nulla qui? Assumenda doloremque inventore nesciunt ratione suscipit! Adipisci dolorum fugiat impedit molestias natus quaerat similique tenetur unde! Culpa dignissimos facilis, fuga ipsa nihil quas quos ratione voluptatibus.</span><span>A accusantium aliquid aspernatur inventore obcaecati tempora velit! Consectetur eius est incidunt laudantium rem tempore, veniam. Accusamus animi culpa delectus eos et facilis laboriosam, nihil nisi perspiciatis qui tempore veniam!</span><span>Alias autem beatae cupiditate id laboriosam maxime modi reprehenderit similique veritatis vero! Aliquid deleniti eaque, eveniet in necessitatibus nihil nisi pariatur voluptas. Atque beatae cupiditate ea earum eos laudantium, nam?</span><span>Ab, aliquid incidunt. Aperiam error exercitationem illo numquam tenetur? Accusantium animi dolore dolores eaque ex exercitationem expedita ipsam nesciunt numquam perferendis placeat possimus, quam qui, reiciendis saepe temporibus veniam, voluptatibus?</span>
+            </p>
         </div>
-        <div class="carousel-item h-25">
-            <img src="{% static 'media/images/welcome-2.jpeg' %}" style="height: 75vh" class="d-block img-fluid mx-auto" alt="img-2">
-        </div>
-        <div class="carousel-item h-25">
-            <img src="{% static 'media/images/welcome-3.jpg' %}" style="height: 75vh" class="d-block img-fluid mx-auto" alt="img-3">
-        </div>
+
+        <!--    <div id="carousel" class="carousel slide" data-bs-ride="carousel">-->
+        <!--        <div class="carousel-inner d-flex">-->
+        <!--            <div class="carousel-item active">-->
+        <!--                <img src="{% static 'media/images/welcome-1.jpeg' %}" style="height: 75vh"-->
+        <!--                     class="d-block img-fluid mx-auto" alt="img-1">-->
+        <!--            </div>-->
+        <!--            <div class="carousel-item h-25">-->
+        <!--                <img src="{% static 'media/images/welcome-2.jpeg' %}" style="height: 75vh"-->
+        <!--                     class="d-block img-fluid mx-auto" alt="img-2">-->
+        <!--            </div>-->
+        <!--            <div class="carousel-item h-25">-->
+        <!--                <img src="{% static 'media/images/welcome-3.jpg' %}" style="height: 75vh"-->
+        <!--                     class="d-block img-fluid mx-auto" alt="img-3">-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
     </div>
 </div>
-
 
 {% endblock %}

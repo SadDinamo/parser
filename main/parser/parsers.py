@@ -30,6 +30,40 @@ def getHtml(shareName='SAVA', params=None):
     return html
 
 
+def getHtmlNasdaqFailsToDeliverList(params=None):
+    tickers = Share.objects.all()
+    table = []
+    row = []
+    url = 'https://nasdaqtrader.com/trader.aspx?id=RegSHOThreshold'
+    s = requests.Session()
+    retries = Retry(total=5,
+                    backoff_factor=0.5,
+                    status_forcelist=[500, 502, 503, 504])
+    s.mount(url, HTTPAdapter(max_retries=retries))
+    html = s.get(url, headers=HEADERS, timeout=5, params=params)
+    if html.status_code == 200:  # success
+        bs_content = BeautifulSoup(html.text, 'html.parser')
+        div = bs_content.find(id='threshold')
+        items = div.find_all('tr')
+        for item in items:
+            tags_td = item.find_all('td')
+            if len(tags_td) > 0:
+                for tag in tags_td:
+                    row.append(str(tag))
+                    check = False
+                    for ticker in tickers:
+                        if str(row[0]) == '<td>' + ticker.ticker + '</td>':
+                            check = True
+                if check:
+                    row.append('tradable')
+                else:
+                    row.append('non-tradable')
+                print(row)
+                table.append(row)
+                row = []
+    return table
+
+
 def getTickerCode(ticker: Share):
     if ticker.class_code == 'SPBXM':
         ticker_corrected = ticker.ticker
@@ -88,8 +122,10 @@ def parse(request):
                         )
                         new_news_item.save()
                         current_html = html_template.value.replace('\'+new_news_item.title+\'', new_news_item.title)
-                        current_html = current_html.replace('\'+new_news_item.pubDate+\'', news_item.find('pubDate').get_text())
-                        current_html = current_html.replace('\'+new_news_item.description+\'', new_news_item.description)
+                        current_html = current_html.replace('\'+new_news_item.pubDate+\'',
+                                                            news_item.find('pubDate').get_text())
+                        current_html = current_html.replace('\'+new_news_item.description+\'',
+                                                            new_news_item.description)
                         current_html = current_html.replace('\'+new_news_item.link+\'', new_news_item.link)
                         send_mail('[Shares news parser] ' + new_news_item.title,
                                   new_news_item.link + '\n\n' + new_news_item.description,

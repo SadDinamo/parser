@@ -5,9 +5,9 @@ from .models import *
 
 
 urlpatterns = [
-    path('', WelcomeScreen.as_view(), name='welcome_screen'),
+    path('', welcome_screen, name='welcome_screen'),
     path('shareslist', SharesListView.as_view(), name='shares_list'),
-    path('welcome', WelcomeScreen.as_view(), name='welcome_screen'),
+    path('welcome', welcome_screen, name='welcome_screen'),
     path('get_tks_shares',  get_tks_shares, name='get_tks_shares'),
     path('yahoo_parser_news', yahoo_parser_news, name='yahoo_parser_news'),
     path('news_table_report', news_table_report, name='news_table_report'),

@@ -7,14 +7,20 @@ from django.views import generic
 from .models import *
 from django.contrib import messages
 import datetime
-from .parsers import parse, get_yahoo_ajax_progress_bar
+from .parsers import parse, get_yahoo_ajax_progress_bar, getHtmlNasdaqFailsToDeliverList
 from .forms import PreferenceForm, NewsKeyWordForm
 from django.urls import reverse
 
 TOKEN = os.environ["INVEST_TOKEN"]
 
-class WelcomeScreen(generic.TemplateView):
-    template_name = 'parser/welcomeScreen.html'
+# class WelcomeScreen(generic.TemplateView):
+#     template_name = 'parser/welcomeScreen.html'
+
+
+def welcome_screen(request):
+    fails_to_deliver = getHtmlNasdaqFailsToDeliverList
+    data = {"fails_to_deliver": fails_to_deliver}
+    return render(request, 'parser/welcomeScreen.html', context=data)
 
 
 class SharesListView(generic.ListView):
@@ -133,7 +139,7 @@ def check_default_preferencies(request):
 def reset_to_defaults(request):
     preferences = Preference.objects.all()
     for pref in preferences:
-        if pref.default_value is not None and pref.default_value is not '':
+        if pref.default_value != None and pref.default_value != '':
             pref.value = pref.default_value
             pref.save()
     return redirect('preferences')
