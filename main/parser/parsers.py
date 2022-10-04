@@ -58,7 +58,6 @@ def getHtmlNasdaqFailsToDeliverList(params=None):
                     row.append('tradable')
                 else:
                     row.append('non-tradable')
-                print(row)
                 table.append(row)
                 row = []
     return table

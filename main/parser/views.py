@@ -7,7 +7,7 @@ from django.views import generic
 from .models import *
 from django.contrib import messages
 import datetime
-from .parsers import parse, get_yahoo_ajax_progress_bar, getHtmlNasdaqFailsToDeliverList
+from .parsers import *
 from .forms import PreferenceForm, NewsKeyWordForm
 from django.urls import reverse
 
@@ -19,7 +19,7 @@ TOKEN = os.environ["INVEST_TOKEN"]
 
 def welcome_screen(request):
     fails_to_deliver = getHtmlNasdaqFailsToDeliverList
-    data = {"fails_to_deliver": fails_to_deliver}
+    data = {'fails_to_deliver': fails_to_deliver}
     return render(request, 'parser/welcomeScreen.html', context=data)
 
 
@@ -69,7 +69,7 @@ def get_tks_shares(request):
                                  country_of_risk=share.country_of_risk,
                                  country_of_risk_name=share.country_of_risk_name,
                                  sector=share.sector,
-                                 date_added=datetime.datetime.now()
+                                 date_added=datetime.now()
                                  )
                 db_share.save()
                 print('Saving new share ticker to db: ' + db_share.ticker)

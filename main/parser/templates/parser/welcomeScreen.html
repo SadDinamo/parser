@@ -5,27 +5,24 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="row mt-3">
-        <div class="col col-auto mx-auto">
-            <h3 class="text-center text-primary">Nasdaq fails to deliver list</h3>
-            <div class="mx-2">
-                <a href="https://nasdaqtrader.com/trader.aspx?id=RegSHOThreshold" target="_blank" class="mx-2">
-                    <span class="small">link to source</span>
-                </a>
-                <table class="table table-hover table-bordered table-sm w-100">
+    <div class="row mt-2">
+        <div class="col col-auto card px-0 mx-2">
+            <h5 class="text-center card-header bg-black bg-opacity-10">Nasdaq fails to deliver list</h5>
+            <div class="card-body p-0">
+                <table class="table table-hover table-sm w-100 mb-0">
                     <thead>
-                    <tr class="bg-primary bg-opacity-50">
-                        <td>Ticker</td>
-                        <td>Ticker name</td>
-                        <td>Trade status</td>
+                    <tr class="text-center bg-black bg-opacity-10">
+                        <td><h6 class="mb-0">Ticker</h6></td>
+                        <td><h6 class="mb-0">Ticker name</h6></td>
+                        <td><h6 class="mb-0">Trade status</h6></td>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="border-top-0">
                     {% for fail in fails_to_deliver %}
                     {% if fail.5|striptags == 'tradable' %}
                     <tr class="table-danger">
                         {% else %}
-                    <tr>
+                    <tr class="bg-light">
                         {% endif %}
                         <td>
                             <a href="https://finance.yahoo.com/quote/{{ fail.0|striptags }}/key-statistics?p={{ fail.0|striptags }}"
@@ -37,7 +34,20 @@
                     </tbody>
                 </table>
             </div>
+            <div class="card-footer text-muted text-center py-0">
+                <a href="https://nasdaqtrader.com/trader.aspx?id=RegSHOThreshold" target="_blank">
+                    <span class="small">link to source</span>
+                </a>
+            </div>
         </div>
+
+
+        <div class="col">
+            <p>
+                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos ducimus eos excepturi expedita fugit ipsum pariatur porro sint soluta velit. Assumenda distinctio enim incidunt maxime mollitia necessitatibus quam quibusdam vero.</span><span>Adipisci aliquid, asperiores aut debitis deserunt enim ex excepturi fuga fugit id incidunt ipsa magni modi mollitia nobis nulla perspiciatis reprehenderit similique soluta vitae voluptas voluptate voluptatum? Aspernatur, odit, perferendis.</span><span>Architecto aspernatur commodi corporis cum delectus, deserunt, dolorem doloribus dolorum eaque esse excepturi facilis fuga harum in incidunt ipsam libero minus nostrum nulla perferendis repellendus sint ullam vel voluptas voluptates.</span><span>A adipisci aliquid atque aut corporis cupiditate, dolor dolorem eaque modi molestias, nam non odit officia, quas reprehenderit rerum soluta vitae voluptate. Autem et laborum officia quasi quod vitae voluptate.</span><span>Ad, asperiores aspernatur distinctio ea eaque eligendi eos eveniet fuga fugit hic iste iure mollitia odit quam quos repellat, sed suscipit tempora tenetur vero. Corporis cumque delectus error velit voluptatum?</span><span>Ab accusamus, beatae cumque eaque earum harum id iure labore magnam magni minus modi molestiae obcaecati provident quidem repellendus sed sit suscipit, tempora voluptas? Animi eius impedit minima porro sequi!</span><span>Distinctio eligendi error minus molestias repellat vel. A aspernatur doloribus molestiae non placeat reprehenderit tempore unde voluptas? Architecto corporis dolor eaque eius error, ipsa, maiores, minus molestiae natus perspiciatis porro!</span><span>A aliquid asperiores, blanditiis consequatur cum delectus doloremque eligendi eos error excepturi facilis, fuga illo ipsum nam natus nostrum nulla omnis porro quaerat quia ratione reiciendis soluta ullam voluptate voluptatibus.</span><span>Asperiores at autem cum molestiae nam quae recusandae saepe similique. Aliquam aperiam deleniti error ex explicabo facere facilis fuga, fugiat, iure iusto nam optio placeat quos reprehenderit rerum unde voluptas.</span><span>Ad animi architecto aspernatur, aut blanditiis cumque debitis laboriosam laudantium maiores minus modi nam natus nobis possimus praesentium provident quasi recusandae rem rerum saepe sed suscipit ut vero voluptatibus voluptatum!</span>
+            </p>
+        </div>
+
 
         <div class="col">
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid beatae dolores error
@@ -68,5 +78,6 @@
         <!--    </div>-->
     </div>
 </div>
+
 
 {% endblock %}
