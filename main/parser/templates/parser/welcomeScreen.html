@@ -24,11 +24,11 @@
                         {% else %}
                     <tr class="bg-light">
                         {% endif %}
-                        <td>
+                        <td class="py-0">
                             <a href="https://finance.yahoo.com/quote/{{ fail.0|striptags }}/key-statistics?p={{ fail.0|striptags }}"
                                target="_blank">{{ fail.0|striptags }}</a></td>
-                        <td>{{ fail.1|striptags }}</td>
-                        <td>{{ fail.5|striptags }}</td>
+                        <td class="py-0">{{ fail.1|striptags }}</td>
+                        <td class="py-0 small">{{ fail.5|striptags }}</td>
                     </tr>
                     {% endfor %}
                     </tbody>

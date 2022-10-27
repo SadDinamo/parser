@@ -10,6 +10,7 @@ import datetime
 from .parsers import *
 from .forms import PreferenceForm, NewsKeyWordForm
 from django.urls import reverse
+from django.core.paginator import Paginator, EmptyPage
 
 TOKEN = os.environ["INVEST_TOKEN"]
 
@@ -44,8 +45,13 @@ class SharesListView(generic.ListView):
         return context
 
 
-def news_table_report(request):
+def news_table_report(request, page=1):
     news_list = News.objects.all().order_by('-pubDate')
+    paginator = Paginator(news_list, 6)
+    try:
+        news_list = paginator.page(page)
+    except EmptyPage:
+        news_list = paginator.page(paginator.num_pages)
     return render(request, 'news_table_report.html', {'news_list': news_list})
 
 
@@ -89,6 +95,7 @@ def get_tks_shares(request):
 
 
 def get_yahoo_ajax_progress_bar_data(request):
+    print(request)
     result = get_yahoo_ajax_progress_bar(request)
     return result
 
