@@ -35,7 +35,7 @@
                                 <i class="fa-solid fa-rectangle-list"></i> Shares report</a>
                         </li>
                         <li class="nav-item">
-                            <form action="/get_tks_shares">
+                            <form action="{% url 'get_tks_shares' %}">
                                 {% csrf_token %}
                                 <button id="get-tks-shares-btn" class="dropdown-item border-0">
                                     <i class="fa-solid fa-bolt"></i> Get tks shares
@@ -50,7 +50,7 @@
                                 <i class="fa-solid fa-rectangle-list"></i> News report</a>
                         </li>
                         <li class="nav-item">
-                            <form action="/yahoo_parser_news">
+                            <form action="{% url 'yahoo_parser_news'%}">
                                 {% csrf_token %}
                                 <button id="yahoo_parser_news-btn" class="dropdown-item border-0">
                                     <i class="fa-solid fa-bolt"></i> Parse yahoo tickers news

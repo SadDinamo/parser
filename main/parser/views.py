@@ -95,14 +95,13 @@ def get_tks_shares(request):
 
 
 def get_yahoo_ajax_progress_bar_data(request):
-    print(request)
     result = get_yahoo_ajax_progress_bar(request)
     return result
 
 
 def yahoo_parser_news(request):
     parse(request)
-    return redirect('news_table_report')
+    return redirect('news_table_report', page=1)
 
 
 class PreferencesListView(generic.ListView):

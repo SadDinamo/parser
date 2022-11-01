@@ -29,10 +29,10 @@ document.getElementById('yahoo_parser_news-btn').addEventListener('click', funct
     function check_yahoo_finance_progress_bar() {
         if (document.getElementById('yahooFinanceProgressBarModal').classList.contains('show')) {
             $.ajax({
-                url: 'get_yahoo_ajax_progress_bar_data',
+                url: '/get_yahoo_ajax_progress_bar_data',
                 method: 'POST',
                 dataType: 'json',
-                data: {'id': 'yahooFinanceProgressBar'},
+                data: {},
                 headers: {"X-CSRFToken": getCookie('csrftoken')},
                 mode: 'same-origin', // Do not send CSRF token to another domain.
                 success: function (data) {

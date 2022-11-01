@@ -24,9 +24,7 @@ def getHtml(shareName='SAVA', params=None):
                     backoff_factor=0.5,
                     status_forcelist=[500, 502, 503, 504])
     s.mount(url, HTTPAdapter(max_retries=retries))
-    # print('Parsing url: ' + url)
     html = s.get(url, headers=HEADERS, timeout=5, params=params)
-    # print('Server respond code: ' + str(html.status_code))
     return html
 
 
