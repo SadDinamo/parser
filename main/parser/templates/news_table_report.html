@@ -15,12 +15,7 @@
             <ul class="pagination">
                 {% if news_list.has_previous %}
                 <li class="page-item">
-                    {% if search %}
-                    <p>123</p>
-                    <a class="page-link" href=" {{ request.path }}/1/&val={{ search }}">First page</a>
-                    {% else %}
-                    <a class="page-link" href=" {% url 'news_table_report' 1 %}">First page</a>
-                    {% endif %}
+                    <a class="page-link" href=" {% url 'news_table_report' 1 %}?val={{ search_word }}">First page</a>
                 </li>
                 {% else %}
                 <li class="page-item disabled">
@@ -30,11 +25,7 @@
 
                 {% if news_list.has_previous %}
                 <li class="page-item">
-                    {% if search %}
-                    <a class="page-link" href=" {{ request.path }}?page={{ page_obj.previous_page_number }}&val={{ search }} ">&laquo</a>
-                    {% else %}
-                    <a class="page-link" href=" {% url 'news_table_report' news_list.previous_page_number %} ">&laquo</a>
-                    {% endif %}
+                    <a class="page-link" href=" {% url 'news_table_report' news_list.previous_page_number %}?val={{ search_word }} ">&laquo</a>
                 </li>
                 {% else %}
                 <li class="page-item disabled">
@@ -45,46 +36,26 @@
                 {% for n in news_list.paginator.page_range %}
                 {% if news_list.number == n %}
                 <li class="page-item active">
-                    {% if search %}
-                    <a class="page-link" href="{{ request.path }}?page={{ n }}&val={{ search }}">{{ n }}</a>
-                    {% else %}
-                    <a class="page-link" href="{% url 'news_table_report' n %}">{{ n }}</a>
-                    {% endif %}
+                    <a class="page-link" href="{% url 'news_table_report' n %}?val={{ search_word }}">{{ n }}</a>
                 </li>
                 {% elif n|add:-4 >= news_list.number and n <= 7 %}
                 <li class="page-item">
-                    {% if search %}
-                    <a class="page-link" href="{% url 'news_table_report' n %}&val={{ search }}">{{ n }}</a>
-                    {% else %}
-                    <a class="page-link" href="{% url 'news_table_report' n %}">{{ n }}</a>
-                    {% endif %}
+                    <a class="page-link" href="{% url 'news_table_report' n %}?val={{ search_word }}">{{ n }}</a>
                 </li>
                 {% elif n|add:4 <= news_list.number and n >= news_list.paginator.num_pages|add:-6 %}
                 <li class="page-item">
-                    {% if search %}
-                    <a class="page-link" href="{{ request.path }}?page={{ n }}&val={{ search }}">{{ n }}</a>
-                    {% else %}
-                    <a class="page-link" href="{% url 'news_table_report' n %}">{{ n }}</a>
-                    {% endif %}
+                    <a class="page-link" href="{% url 'news_table_report' n %}?val={{ search_word }}">{{ n }}</a>
                 </li>
                 {% elif n >= news_list.number|add:-3 and n <= news_list.number|add:3 %}
                 <li class="page-item">
-                    {% if search %}
-                    <a class="page-link" href="{{ request.path }}?page={{ n }}&val={{ search }}">{{ n }}</a>
-                    {% else %}
-                    <a class="page-link" href="{% url 'news_table_report' n %}">{{ n }}</a>
-                    {% endif %}
+                    <a class="page-link" href="{% url 'news_table_report' n %}?val={{ search_word }}">{{ n }}</a>
                 </li>
                 {% endif %}
                 {% endfor %}
 
                 {% if news_list.has_next %}
                 <li class="page-item">
-                    {% if search %}
-                    <a class="page-link" href=" {{ request.path }}?page={{ page_obj.next_page_number }}&val={{ search }} ">&raquo</a>
-                    {% else %}
-                    <a class="page-link" href=" {% url 'news_table_report' news_list.next_page_number %} ">&raquo</a>
-                    {% endif %}
+                    <a class="page-link" href=" {% url 'news_table_report' news_list.next_page_number %}?val={{ search_word }} ">&raquo</a>
                 </li>
                 {% else %}
                 <li class="page-item disabled">
@@ -94,11 +65,7 @@
 
                 {% if news_list.number != news_list.paginator.num_pages %}
                 <li class="page-item">
-                    {% if search %}
-                    <a class="page-link" href=" {{ request.path }}?page={{ paginator.num_pages }}&val={{ search }} ">Last page</a>
-                    {% else %}
-                    <a class="page-link" href=" {% url 'news_table_report' news_list.paginator.num_pages %} ">Last page</a>
-                    {% endif %}
+                    <a class="page-link" href=" {% url 'news_table_report' news_list.paginator.num_pages %}?val={{ search_word }} ">Last page</a>
                 </li>
                 {% else %}
                 <li class="page-item disabled">
@@ -110,7 +77,7 @@
 
         <div class="mx-0 mx-md-2"></div>
         <form class="d-flex mb-4 col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3">
-            <input class="form-control me-2" name="val" type="search" placeholder="Search by ticker or name" aria-label="Search">
+            <input class="form-control me-2" name="val" type="search" placeholder="Search in title and description" aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
     </div>

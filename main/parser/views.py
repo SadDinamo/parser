@@ -46,13 +46,17 @@ class SharesListView(generic.ListView):
 
 
 def news_table_report(request, page=1):
-    news_list = News.objects.all().order_by('-pubDate')
+    search_word = request.GET.get('val', '').strip()
+    if len(search_word) == 0:
+        news_list = News.objects.all().order_by('-pubDate')
+    else:
+        news_list = News.objects.filter(Q(title__contains=search_word) | Q(description__contains=search_word))
     paginator = Paginator(news_list, 6)
     try:
         news_list = paginator.page(page)
     except EmptyPage:
         news_list = paginator.page(paginator.num_pages)
-    return render(request, 'news_table_report.html', {'news_list': news_list})
+    return render(request, 'news_table_report.html', {'news_list': news_list, 'search_word': search_word})
 
 
 def get_tks_shares(request):
