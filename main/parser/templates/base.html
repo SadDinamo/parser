@@ -10,6 +10,8 @@
     {% load static %}
     <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
     <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/ajax.js' %}"></script>
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
 </head>
 
@@ -50,12 +52,9 @@
                                 <i class="fa-solid fa-rectangle-list"></i> News report</a>
                         </li>
                         <li class="nav-item">
-                            <form action="{% url 'yahoo_parser_news'%}">
-                                {% csrf_token %}
-                                <button id="yahoo_parser_news-btn" class="dropdown-item border-0">
-                                    <i class="fa-solid fa-bolt"></i> Parse yahoo tickers news
-                                </button>
-                            </form>
+                            <button id="yahoo_parser_news_show-btn" class="dropdown-item border-0">
+                                <i class="fa-solid fa-bolt"></i> Parse yahoo tickers news
+                            </button>
                         </li>
                         <li class="nav-item">
                             <a class="dropdown-item" href="{% url 'news_key_words_list' %}">
@@ -110,17 +109,41 @@
                 <h5 class="modal-title" id="yahooFinanceProgressBarModalLabel">Parsing Yahoo.Finance news</h5>
             </div>
             <div class="modal-body">
-                <div class="progress">
-                    <div id="yahooFinanceProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
-                         role="progressbar"
-                         style="width: 0%;" aria-valuenow="0"
-                         aria-valuemin="0" aria-valuemax="100">
+                <div class="d-flex flex-column">
+                    <div class="progress">
+                        <div id="yahooFinanceProgressBar"
+                             class="progress-bar progress-bar-striped progress-bar-animated"
+                             role="progressbar"
+                             style="width: 0%;" aria-valuenow="0"
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
                     </div>
+                    <div id="yahooFinanceProgressBarLabel" class="mr-auto"></div>
                 </div>
-                <div id="yahooFinanceProgressBarLabel" class="mr-auto"></div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hide
+            <div class="d-flex flex-column border-top modal-body">
+                <div class="form-check">
+                    <input id="check-send-email-notifications" class="form-check-input" type="checkbox" value="" id="CheckboxEmailNotification"
+                           checked="true">
+                    <label class="form-check-label" for="CheckboxEmailNotification">
+                        Send e-mail notifications
+                    </label>
+                </div>
+                <div class="input-group input-group-sm mb-0">
+                    <span class="input-group-text" id="news-parser-input-area">E-mail recipient list</span>
+                    <input type="email" class="form-control" id="news-parser-email-input"
+                           aria-label="news parser input area"
+                           aria-describedby="news-parser-input-area">
+                </div>
+            </div>
+
+            <div class="modal-footer d-flex flex-row">
+                <a id="yahoo_parser_news-btn" href="{% url 'yahoo_parser_news'%}" class="btn btn-primary col col-3">
+                    Run
+                </a>
+                <div class="flex-grow-1"></div>
+                <button type="button" class="btn btn-secondary col col-3" data-bs-dismiss="modal">
+                    Hide
                 </button>
             </div>
         </div>
@@ -130,7 +153,6 @@
 {% block content %}
 {% endblock %}
 
-<script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/toasts.js' %}"></script>
 <script src="{% static 'js/yahooFinanceProgressBarModal.js' %}"></script>
 

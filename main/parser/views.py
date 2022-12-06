@@ -20,6 +20,8 @@ TOKEN = os.environ["INVEST_TOKEN"]
 
 def welcome_screen(request):
     fails_to_deliver = getHtmlNasdaqFailsToDeliverList
+    # cnn_fear_and_greed_data = getCnnFearAndGreedStats(request)
+    # data = {'fails_to_deliver': fails_to_deliver, 'fear_and_greed': cnn_fear_and_greed_data}
     data = {'fails_to_deliver': fails_to_deliver}
     return render(request, 'parser/welcomeScreen.html', context=data)
 
@@ -100,6 +102,16 @@ def get_tks_shares(request):
 
 def get_yahoo_ajax_progress_bar_data(request):
     result = get_yahoo_ajax_progress_bar(request)
+    return result
+
+
+def get_cnn_fear_and_greed_stats(request):
+    result = getCnnFearAndGreedStats(request)
+    return result
+
+
+def get_finviz_futures_data(request):
+    result = getFinvizFuturesData(request)
     return result
 
 

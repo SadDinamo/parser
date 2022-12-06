@@ -22,6 +22,8 @@ urlpatterns = [
     path('news_key_words_create', NewsKeyWordsCreate.as_view(), name='news_key_words_create'),
     path('news_key_words_update/<int:pk>/', NewsKeyWordsUpdate.as_view(), name='news_key_words_update'),
     path('news_key_words_delete/<int:pk>/', NewsKeyWordsDelete.as_view(), name='news_key_words_delete'),
+    path('get_cnn_fear_and_greed_stats', get_cnn_fear_and_greed_stats, name='get_cnn_fear_and_greed_stats'),
+    path('get_finviz_futures_data', get_finviz_futures_data, name='get_finviz_futures_data'),
     path('ttest',  ttest, name='ttest'),
 ]
 

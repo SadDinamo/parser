@@ -6,8 +6,6 @@
     <h2 class="mx-auto">News table report</h2>
 </div>
 
-{{ page }}
-
 <div class="d-flex">
     <div class="mx-auto d-flex flex-wrap justify-content-center col-10">
 
@@ -77,7 +75,11 @@
 
         <div class="mx-0 mx-md-2"></div>
         <form class="d-flex mb-4 col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3">
-            <input class="form-control me-2" name="val" type="search" placeholder="Search in title and description" aria-label="Search">
+            {% if search_word %}
+                <input class="form-control me-2" name="val" type="search" value="{{ search_word }}" placeholder="Search in title and description" aria-label="Search">
+            {% else %}
+                <input class="form-control me-2" name="val" type="search" placeholder="Search in title and description" aria-label="Search">
+            {% endif %}
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
     </div>

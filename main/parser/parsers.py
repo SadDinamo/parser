@@ -9,11 +9,18 @@ from django.conf import settings
 from django.core.mail import send_mail, EmailMessage
 import json
 
-# ***** Yahoo news Parser section *****
 
 HEADERS = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
     'accept': '*/*',
+}
+
+HEADERS_CNN = {
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 YaBrowser/22.11.0.2500 Yowser/2.5 Safari/537.36',
+    'accept': '*/*',
+    'sec-ch-ua-platform': 'Windows',
+    'sec-fetch-site': 'cross-site',
+    'sec-fetch-mode': 'cors'
 }
 
 
@@ -59,6 +66,37 @@ def getHtmlNasdaqFailsToDeliverList(params=None):
                 table.append(row)
                 row = []
     return table
+
+
+def getCnnFearAndGreedStats(request):
+    url = 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata/'
+    s = requests.Session()
+    retries = Retry(total=5,
+                    backoff_factor=0.5,
+                    status_forcelist=[500, 502, 503, 504])
+    s.mount(url, HTTPAdapter(max_retries=retries))
+    html = s.get(url, headers=HEADERS_CNN, timeout=5)
+    if html.status_code == 200:  # success
+        bs_content = BeautifulSoup(html.text, 'html.parser')
+        result = json.loads(bs_content.text)
+    else:
+        result = html.content
+    return JsonResponse(result)
+
+def getFinvizFuturesData(request):
+    url = 'https://finviz.com/api/futures_all.ashx?timeframe=d1'
+    s = requests.Session()
+    retries = Retry(total=5,
+                    backoff_factor=0.5,
+                    status_forcelist=[500, 502, 503, 504])
+    s.mount(url, HTTPAdapter(max_retries=retries))
+    html = s.get(url, headers=HEADERS_CNN, timeout=5)
+    if html.status_code == 200:  # success
+        bs_content = BeautifulSoup(html.text, 'html.parser')
+        result = json.loads(bs_content.text)
+    else:
+        result = html.content
+    return JsonResponse(result)
 
 
 def getTickerCode(ticker: Share):

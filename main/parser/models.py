@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.core import serializers
 from datetime import datetime
 from tinkoff.invest import Client
+from django.db.models.functions import Upper
 
 
 class Share(models.Model):
@@ -42,6 +43,7 @@ class NewsKeyWord(models.Model):
     class Meta:
         verbose_name = 'ключевое слово'
         verbose_name_plural = 'ключевые слова'
+        ordering = [Upper('keyword'), 'keyword']
 
     def get_absolute_url(self):
         return reverse('news_key_words_list')
@@ -62,6 +64,7 @@ class News(models.Model):
     class Meta:
         verbose_name = 'новость'
         verbose_name_plural = 'новости'
+        ordering = ['-pubDate']
 
 
 class Preference(models.Model):

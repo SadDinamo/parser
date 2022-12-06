@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="row mt-2">
+    <div class="row mt-2 align-items-start">
         <div class="col col-auto card px-0 mx-2">
             <h5 class="text-center card-header bg-black bg-opacity-10">Nasdaq fails to deliver list</h5>
             <div class="card-body p-0">
@@ -40,15 +40,123 @@
                 </a>
             </div>
         </div>
-
-
         <div class="col">
-            <p>
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos ducimus eos excepturi expedita fugit ipsum pariatur porro sint soluta velit. Assumenda distinctio enim incidunt maxime mollitia necessitatibus quam quibusdam vero.</span><span>Adipisci aliquid, asperiores aut debitis deserunt enim ex excepturi fuga fugit id incidunt ipsa magni modi mollitia nobis nulla perspiciatis reprehenderit similique soluta vitae voluptas voluptate voluptatum? Aspernatur, odit, perferendis.</span><span>Architecto aspernatur commodi corporis cum delectus, deserunt, dolorem doloribus dolorum eaque esse excepturi facilis fuga harum in incidunt ipsam libero minus nostrum nulla perferendis repellendus sint ullam vel voluptas voluptates.</span><span>A adipisci aliquid atque aut corporis cupiditate, dolor dolorem eaque modi molestias, nam non odit officia, quas reprehenderit rerum soluta vitae voluptate. Autem et laborum officia quasi quod vitae voluptate.</span><span>Ad, asperiores aspernatur distinctio ea eaque eligendi eos eveniet fuga fugit hic iste iure mollitia odit quam quos repellat, sed suscipit tempora tenetur vero. Corporis cumque delectus error velit voluptatum?</span><span>Ab accusamus, beatae cumque eaque earum harum id iure labore magnam magni minus modi molestiae obcaecati provident quidem repellendus sed sit suscipit, tempora voluptas? Animi eius impedit minima porro sequi!</span><span>Distinctio eligendi error minus molestias repellat vel. A aspernatur doloribus molestiae non placeat reprehenderit tempore unde voluptas? Architecto corporis dolor eaque eius error, ipsa, maiores, minus molestiae natus perspiciatis porro!</span><span>A aliquid asperiores, blanditiis consequatur cum delectus doloremque eligendi eos error excepturi facilis, fuga illo ipsum nam natus nostrum nulla omnis porro quaerat quia ratione reiciendis soluta ullam voluptate voluptatibus.</span><span>Asperiores at autem cum molestiae nam quae recusandae saepe similique. Aliquam aperiam deleniti error ex explicabo facere facilis fuga, fugiat, iure iusto nam optio placeat quos reprehenderit rerum unde voluptas.</span><span>Ad animi architecto aspernatur, aut blanditiis cumque debitis laboriosam laudantium maiores minus modi nam natus nobis possimus praesentium provident quasi recusandae rem rerum saepe sed suscipit ut vero voluptatibus voluptatum!</span>
-            </p>
+            <div class="row">
+                <div class="col col-6">
+                    <h5 id="FnG-heading">CNN Fear and Greed index</h5>
+                    <figure class="highcharts-figure">
+                        <div id="hc-fear-and-greed-container"></div>
+                        <p class="highcharts-description"></p>
+                    </figure>
+                    <a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank">
+                        <span class="small">link to source</span>
+                    </a>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h5 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    FEAR & GREED INDEX FAQS
+                                </button>
+                            </h5>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingOne"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <figure>
+                                        <blockquote class="blockquote">
+                                            <p>What is the CNN Business Fear & Greed Index?</p>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer">
+                                            The Fear & Greed Index is a way to gauge stock market movements and whether
+                                            stocks
+                                            are fairly
+                                            priced. The theory is based on the logic that excessive fear tends to drive
+                                            down
+                                            share prices,
+                                            and too much greed tends to have the opposite effect.
+                                        </figcaption>
+                                    </figure>
+                                    <figure>
+                                        <blockquote class="blockquote">
+                                            <p>How is Fear & Greed Calculated?</p>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer">
+                                            The Fear & Greed Index is a compilation of seven different indicators that
+                                            measure
+                                            some aspect
+                                            of stock market behavior. They are market momentum, stock price strength,
+                                            stock
+                                            price breadth,
+                                            put and call options, junk bond demand, market volatility, and safe haven
+                                            demand.
+                                            The index
+                                            tracks how much these individual indicators deviate from their averages
+                                            compared
+                                            to
+                                            how much
+                                            they normally diverge. The index gives each indicator equal weighting in
+                                            calculating
+                                            a score
+                                            from 0 to 100, with 100 representing maximum greediness and 0 signaling
+                                            maximum
+                                            fear.
+                                        </figcaption>
+                                    </figure>
+                                    <figure>
+                                        <blockquote class="blockquote">
+                                            <p>How often is the Fear & Greed Index calculated?</p>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer">
+                                            Every component and the Index are calculated as soon as new data becomes
+                                            available.
+                                        </figcaption>
+                                    </figure>
+                                    <figure>
+                                        <blockquote class="blockquote">
+                                            <p>How to use Fear & Greed Index?</p>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer">
+                                            The Fear & Greed Index is used to gauge the mood of the market. Many
+                                            investors
+                                            are
+                                            emotional and
+                                            reactionary, and fear and greed sentiment indicators can alert investors to
+                                            their
+                                            own emotions
+                                            and biases that can influence their decisions. When combined with
+                                            fundamentals
+                                            and
+                                            other
+                                            analytical tools, the Index can be a helpful way to assess market sentiment.
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-6" id="finvizFuturesContainer">
+                    <div class="text-primary">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    </div>
+                    <div id="finvizFuturesGold"></div>
+                    <div id="finvizFuturesBrent"></div>
+                    <div id="finvizNaturalGas"></div>
+                    <div id="finvizNasdaq100"></div>
+                    <div class="text-danger">
+                        <i class="fa-solid fa-circle-down"></i>
+                    </div>
+                    <div class="text-success">
+                        <i class="fa-solid fa-circle-up"></i>
+                    </div>
+                    <div class="text-secondary">
+                        <i class="fa-solid fa-circle-right"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
         <div class="col">
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid beatae dolores error
                 exercitationem
@@ -59,25 +167,16 @@
             <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid assumenda aut cumque ea earum eos, et eum in iure maxime nam nobis praesentium quidem repellat sunt temporibus tenetur veniam.</span><span>Ab assumenda, cupiditate delectus dicta distinctio dolore, eaque eligendi ex in itaque laboriosam molestias numquam, omnis quas sint suscipit tempora totam. Aliquid ipsum laborum numquam odit quisquam sed, tempora velit.</span><span>Ab adipisci aliquam asperiores beatae corporis dolorem, doloremque facere illo inventore iure laborum non nostrum quod repellendus repudiandae rerum ut voluptatem, voluptates! Dolores labore odit provident reprehenderit! Cumque, fugit ullam!</span><span>Alias corporis deleniti dolore dolores eum explicabo illo officiis perferendis, praesentium quasi qui quibusdam. Aliquam asperiores beatae corporis dicta ex facilis, harum illum iste nostrum placeat quas quisquam quod tempore?</span><span>Amet aut, blanditiis corporis dolores dolorum earum enim, error, et expedita illo incidunt iste molestias nesciunt nostrum sed sit soluta voluptates voluptatibus. Aliquid amet assumenda illo itaque omnis rerum, vel.</span><span>Culpa cumque doloremque eaque eligendi, iusto magni molestiae nostrum optio voluptatem. Enim excepturi fugit laboriosam tempora. Architecto itaque maxime minus nam, non perspiciatis repellat velit. Cum deserunt maiores odit optio?</span><span>Ab ad nulla qui? Assumenda doloremque inventore nesciunt ratione suscipit! Adipisci dolorum fugiat impedit molestias natus quaerat similique tenetur unde! Culpa dignissimos facilis, fuga ipsa nihil quas quos ratione voluptatibus.</span><span>A accusantium aliquid aspernatur inventore obcaecati tempora velit! Consectetur eius est incidunt laudantium rem tempore, veniam. Accusamus animi culpa delectus eos et facilis laboriosam, nihil nisi perspiciatis qui tempore veniam!</span><span>Alias autem beatae cupiditate id laboriosam maxime modi reprehenderit similique veritatis vero! Aliquid deleniti eaque, eveniet in necessitatibus nihil nisi pariatur voluptas. Atque beatae cupiditate ea earum eos laudantium, nam?</span><span>Ab, aliquid incidunt. Aperiam error exercitationem illo numquam tenetur? Accusantium animi dolore dolores eaque ex exercitationem expedita ipsam nesciunt numquam perferendis placeat possimus, quam qui, reiciendis saepe temporibus veniam, voluptatibus?</span>
             </p>
         </div>
-
-        <!--    <div id="carousel" class="carousel slide" data-bs-ride="carousel">-->
-        <!--        <div class="carousel-inner d-flex">-->
-        <!--            <div class="carousel-item active">-->
-        <!--                <img src="{% static 'media/images/welcome-1.jpeg' %}" style="height: 75vh"-->
-        <!--                     class="d-block img-fluid mx-auto" alt="img-1">-->
-        <!--            </div>-->
-        <!--            <div class="carousel-item h-25">-->
-        <!--                <img src="{% static 'media/images/welcome-2.jpeg' %}" style="height: 75vh"-->
-        <!--                     class="d-block img-fluid mx-auto" alt="img-2">-->
-        <!--            </div>-->
-        <!--            <div class="carousel-item h-25">-->
-        <!--                <img src="{% static 'media/images/welcome-3.jpg' %}" style="height: 75vh"-->
-        <!--                     class="d-block img-fluid mx-auto" alt="img-3">-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--    </div>-->
     </div>
 </div>
 
+<script src="{% static 'highcharts/code/highcharts.js' %}"></script>
+<script src="{% static 'highcharts/code/highcharts-more.js' %}"></script>
+<script src="{% static 'highcharts/code/modules/exporting.js' %}"></script>
+<script src="{% static 'highcharts/code/modules/export-data.js' %}"></script>
+<script src="{% static 'highcharts/code/modules/accessibility.js' %}"></script>
+
+<script src="{% static 'js/cnnFearAndGreed.js' %}"></script>
+<script src="{% static 'js/finvizFutures.js' %}"></script>
 
 {% endblock %}
