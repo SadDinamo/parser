@@ -83,8 +83,8 @@
 </nav>
 
 <!--   Toasts section   -->
-{% if messages %}
-<div class="toast-container position-absolute top-2 end-0" style="z-index:2">
+<div class="toast-container position-absolute top-2 end-0" style="z-index:2" id="toasts-section">
+    {% if messages %}
     {% for message in messages %}
     <div class="toast align-items-center text-white bg-{% if message.tags %}{{ message.tags }}{% endif %} border-0"
          role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
@@ -97,8 +97,8 @@
         </div>
     </div>
     {% endfor %}
+    {% endif %}
 </div>
-{% endif %}
 
 <!--  Progress bar in modal window: parsing Yahoo.Finance news  -->
 <div class="modal fade" id="yahooFinanceProgressBarModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -123,7 +123,8 @@
             </div>
             <div class="d-flex flex-column border-top modal-body">
                 <div class="form-check">
-                    <input id="check-send-email-notifications" class="form-check-input" type="checkbox" value="" id="CheckboxEmailNotification"
+                    <input id="check-send-email-notifications" class="form-check-input" type="checkbox" value=""
+                           id="CheckboxEmailNotification"
                            checked="true">
                     <label class="form-check-label" for="CheckboxEmailNotification">
                         Send e-mail notifications

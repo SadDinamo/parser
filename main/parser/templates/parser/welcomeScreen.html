@@ -40,104 +40,72 @@
                 </a>
             </div>
         </div>
-        <div class="col">
+        <div class="col col-auto card px-0 mx-2">
+            <h5 class="text-center card-header bg-black bg-opacity-10">Indexes</h5>
+            <div class="card-body p-0">
+                <table class="table table-hover table-sm w-100 mb-0">
+                    <thead>
+                    <tr class="text-center bg-black bg-opacity-10">
+                        <td><h6 class="mb-0">Index</h6></td>
+                        <td><h6 class="mb-0">Value</h6></td>
+                        <td><h6 class="mb-0">Daily change</h6></td>
+                        <td><h6 class="mb-0"></h6></td>
+                    </tr>
+                    </thead>
+                    <tbody class="border-top-0">
+                    <tr class="bg-light" id="tr-cnn-fear-and-greed">
+                        <td class="py-0" id="cnn-fear-and-greed-name">CNN fear and greed index</td>
+                        <td class="py-0" id="cnn-fear-and-greed-value"></td>
+                        <td class="py-0" id="cnn-fear-and-greed-change"></td>
+                        <td class="py-0" id="cnn-fear-and-greed-comment"></td>
+                    </tr>
+                    <tr class="bg-light" id="tr-finviz-GC">
+                        <td class="py-0" id="tr-finviz-GC-name"></td>
+                        <td class="py-0" id="tr-finviz-GC-value"></td>
+                        <td class="py-0" id="tr-finviz-GC-change"></td>
+                        <td class="py-0" id="tr-finviz-GC-comment"></td>
+                    </tr>
+                    <tr class="bg-light" id="tr-finviz-QA">
+                        <td class="py-0" id="tr-finviz-QA-name"></td>
+                        <td class="py-0" id="tr-finviz-QA-value"></td>
+                        <td class="py-0" id="tr-finviz-QA-change"></td>
+                        <td class="py-0" id="tr-finviz-QA-comment"></td>
+                    </tr>
+                    <tr class="bg-light" id="tr-finviz-ES">
+                        <td class="py-0" id="tr-finviz-ES-name"></td>
+                        <td class="py-0" id="tr-finviz-ES-value"></td>
+                        <td class="py-0" id="tr-finviz-ES-change"></td>
+                        <td class="py-0" id="tr-finviz-ES-comment"></td>
+                    </tr>
+                    <tr class="bg-light" id="tr-finviz-NQ">
+                        <td class="py-0" id="tr-finviz-NQ-name"></td>
+                        <td class="py-0" id="tr-finviz-NQ-value"></td>
+                        <td class="py-0" id="tr-finviz-NQ-change"></td>
+                        <td class="py-0" id="tr-finviz-NQ-comment"></td>
+                    </tr>
+                    <tr class="bg-light" id="tr-finviz-NG">
+                        <td class="py-0" id="tr-finviz-NG-name"></td>
+                        <td class="py-0" id="tr-finviz-NG-value"></td>
+                        <td class="py-0" id="tr-finviz-NG-change"></td>
+                        <td class="py-0" id="tr-finviz-NG-comment"></td>
+                    </tr>
+                    <tr class="bg-light" id="tr-finviz-ZW">
+                        <td class="py-0" id="tr-finviz-ZW-name"></td>
+                        <td class="py-0" id="tr-finviz-ZW-value"></td>
+                        <td class="py-0" id="tr-finviz-ZW-change"></td>
+                        <td class="py-0" id="tr-finviz-ZW-comment"></td>
+                    </tr>
+                    <tr class="bg-light" id="tr-finviz-PL">
+                        <td class="py-0" id="tr-finviz-PL-name"></td>
+                        <td class="py-0" id="tr-finviz-PL-value"></td>
+                        <td class="py-0" id="tr-finviz-PL-change"></td>
+                        <td class="py-0" id="tr-finviz-PL-comment"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="row">
-                <div class="col col-6">
-                    <h5 id="FnG-heading">CNN Fear and Greed index</h5>
-                    <figure class="highcharts-figure">
-                        <div id="hc-fear-and-greed-container"></div>
-                        <p class="highcharts-description"></p>
-                    </figure>
-                    <a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank">
-                        <span class="small">link to source</span>
-                    </a>
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item">
-                            <h5 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                        aria-controls="flush-collapseOne">
-                                    FEAR & GREED INDEX FAQS
-                                </button>
-                            </h5>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                 aria-labelledby="flush-headingOne"
-                                 data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <figure>
-                                        <blockquote class="blockquote">
-                                            <p>What is the CNN Business Fear & Greed Index?</p>
-                                        </blockquote>
-                                        <figcaption class="blockquote-footer">
-                                            The Fear & Greed Index is a way to gauge stock market movements and whether
-                                            stocks
-                                            are fairly
-                                            priced. The theory is based on the logic that excessive fear tends to drive
-                                            down
-                                            share prices,
-                                            and too much greed tends to have the opposite effect.
-                                        </figcaption>
-                                    </figure>
-                                    <figure>
-                                        <blockquote class="blockquote">
-                                            <p>How is Fear & Greed Calculated?</p>
-                                        </blockquote>
-                                        <figcaption class="blockquote-footer">
-                                            The Fear & Greed Index is a compilation of seven different indicators that
-                                            measure
-                                            some aspect
-                                            of stock market behavior. They are market momentum, stock price strength,
-                                            stock
-                                            price breadth,
-                                            put and call options, junk bond demand, market volatility, and safe haven
-                                            demand.
-                                            The index
-                                            tracks how much these individual indicators deviate from their averages
-                                            compared
-                                            to
-                                            how much
-                                            they normally diverge. The index gives each indicator equal weighting in
-                                            calculating
-                                            a score
-                                            from 0 to 100, with 100 representing maximum greediness and 0 signaling
-                                            maximum
-                                            fear.
-                                        </figcaption>
-                                    </figure>
-                                    <figure>
-                                        <blockquote class="blockquote">
-                                            <p>How often is the Fear & Greed Index calculated?</p>
-                                        </blockquote>
-                                        <figcaption class="blockquote-footer">
-                                            Every component and the Index are calculated as soon as new data becomes
-                                            available.
-                                        </figcaption>
-                                    </figure>
-                                    <figure>
-                                        <blockquote class="blockquote">
-                                            <p>How to use Fear & Greed Index?</p>
-                                        </blockquote>
-                                        <figcaption class="blockquote-footer">
-                                            The Fear & Greed Index is used to gauge the mood of the market. Many
-                                            investors
-                                            are
-                                            emotional and
-                                            reactionary, and fear and greed sentiment indicators can alert investors to
-                                            their
-                                            own emotions
-                                            and biases that can influence their decisions. When combined with
-                                            fundamentals
-                                            and
-                                            other
-                                            analytical tools, the Index can be a helpful way to assess market sentiment.
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-6" id="finvizFuturesContainer">
+                <div class="col" id="finvizFuturesContainer">
                     <div class="text-primary">
                         <i class="fa-solid fa-circle-exclamation"></i>
                     </div>
@@ -169,12 +137,6 @@
         </div>
     </div>
 </div>
-
-<script src="{% static 'highcharts/code/highcharts.js' %}"></script>
-<script src="{% static 'highcharts/code/highcharts-more.js' %}"></script>
-<script src="{% static 'highcharts/code/modules/exporting.js' %}"></script>
-<script src="{% static 'highcharts/code/modules/export-data.js' %}"></script>
-<script src="{% static 'highcharts/code/modules/accessibility.js' %}"></script>
 
 <script src="{% static 'js/cnnFearAndGreed.js' %}"></script>
 <script src="{% static 'js/finvizFutures.js' %}"></script>
