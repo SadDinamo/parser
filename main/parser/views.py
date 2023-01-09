@@ -11,6 +11,8 @@ from .parsers import *
 from .forms import PreferenceForm, NewsKeyWordForm
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage
+from django.core import serializers
+from django.http import JsonResponse
 
 TOKEN = os.environ["INVEST_TOKEN"]
 
@@ -113,6 +115,13 @@ def get_cnn_fear_and_greed_stats(request):
 def get_finviz_futures_data(request):
     result = getFinvizFuturesData(request)
     return result
+
+
+def get_top_news(request):
+    news_count = request.POST.get('newsCount', 10)
+    top_pub_dates = News.objects.order_by('-pubDate').values()
+    result = list(top_pub_dates[:int(news_count)])
+    return JsonResponse(result, safe=False)
 
 
 def yahoo_parser_news(request):

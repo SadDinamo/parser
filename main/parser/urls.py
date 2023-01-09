@@ -24,6 +24,7 @@ urlpatterns = [
     path('news_key_words_delete/<int:pk>/', NewsKeyWordsDelete.as_view(), name='news_key_words_delete'),
     path('get_cnn_fear_and_greed_stats', get_cnn_fear_and_greed_stats, name='get_cnn_fear_and_greed_stats'),
     path('get_finviz_futures_data', get_finviz_futures_data, name='get_finviz_futures_data'),
+    path('get_top_news', get_top_news, name='get_top_news'),
     path('ttest',  ttest, name='ttest'),
 ]
 

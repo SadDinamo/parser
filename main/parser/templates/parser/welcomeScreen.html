@@ -5,39 +5,11 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="row mt-2 align-items-start">
-        <div class="col col-auto card px-0 mx-2">
-            <h5 class="text-center card-header bg-black bg-opacity-10">Nasdaq fails to deliver list</h5>
-            <div class="card-body p-0">
-                <table class="table table-hover table-sm w-100 mb-0">
-                    <thead>
-                    <tr class="text-center bg-black bg-opacity-10">
-                        <td><h6 class="mb-0">Ticker</h6></td>
-                        <td><h6 class="mb-0">Ticker name</h6></td>
-                        <td><h6 class="mb-0">Trade status</h6></td>
-                    </tr>
-                    </thead>
-                    <tbody class="border-top-0">
-                    {% for fail in fails_to_deliver %}
-                    {% if fail.5|striptags == 'tradable' %}
-                    <tr class="table-danger">
-                        {% else %}
-                    <tr class="bg-light">
-                        {% endif %}
-                        <td class="py-0">
-                            <a href="https://finance.yahoo.com/quote/{{ fail.0|striptags }}/key-statistics?p={{ fail.0|striptags }}"
-                               target="_blank">{{ fail.0|striptags }}</a></td>
-                        <td class="py-0">{{ fail.1|striptags }}</td>
-                        <td class="py-0 small">{{ fail.5|striptags }}</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="card-footer text-muted text-center py-0">
-                <a href="https://nasdaqtrader.com/trader.aspx?id=RegSHOThreshold" target="_blank">
-                    <span class="small">link to source</span>
-                </a>
+    <div class="row mt-2 d-flex align-items-start">
+        <div class="col col-6" id="newsColumn">
+            <h5 class="text-center">Latest news</h5>
+            <div class="col">
+                <div id="top-news-section" class="row d-flex justify-content-evenly align-content-stretch"></div>
             </div>
         </div>
         <div class="col col-auto card px-0 mx-2">
@@ -125,20 +97,45 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid beatae dolores error
-                exercitationem
-                incidunt inventore odio quia quis rem, repellat totam voluptate! Assumenda dolor laboriosam quisquam. Ab
-                aliquid necessitatibus sapiente.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad asperiores aut commodi cumque deleniti et,
-                fugit illo in ipsum iusto laboriosam natus nostrum quam repudiandae suscipit totam ullam ut vel.</p>
-            <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid assumenda aut cumque ea earum eos, et eum in iure maxime nam nobis praesentium quidem repellat sunt temporibus tenetur veniam.</span><span>Ab assumenda, cupiditate delectus dicta distinctio dolore, eaque eligendi ex in itaque laboriosam molestias numquam, omnis quas sint suscipit tempora totam. Aliquid ipsum laborum numquam odit quisquam sed, tempora velit.</span><span>Ab adipisci aliquam asperiores beatae corporis dolorem, doloremque facere illo inventore iure laborum non nostrum quod repellendus repudiandae rerum ut voluptatem, voluptates! Dolores labore odit provident reprehenderit! Cumque, fugit ullam!</span><span>Alias corporis deleniti dolore dolores eum explicabo illo officiis perferendis, praesentium quasi qui quibusdam. Aliquam asperiores beatae corporis dicta ex facilis, harum illum iste nostrum placeat quas quisquam quod tempore?</span><span>Amet aut, blanditiis corporis dolores dolorum earum enim, error, et expedita illo incidunt iste molestias nesciunt nostrum sed sit soluta voluptates voluptatibus. Aliquid amet assumenda illo itaque omnis rerum, vel.</span><span>Culpa cumque doloremque eaque eligendi, iusto magni molestiae nostrum optio voluptatem. Enim excepturi fugit laboriosam tempora. Architecto itaque maxime minus nam, non perspiciatis repellat velit. Cum deserunt maiores odit optio?</span><span>Ab ad nulla qui? Assumenda doloremque inventore nesciunt ratione suscipit! Adipisci dolorum fugiat impedit molestias natus quaerat similique tenetur unde! Culpa dignissimos facilis, fuga ipsa nihil quas quos ratione voluptatibus.</span><span>A accusantium aliquid aspernatur inventore obcaecati tempora velit! Consectetur eius est incidunt laudantium rem tempore, veniam. Accusamus animi culpa delectus eos et facilis laboriosam, nihil nisi perspiciatis qui tempore veniam!</span><span>Alias autem beatae cupiditate id laboriosam maxime modi reprehenderit similique veritatis vero! Aliquid deleniti eaque, eveniet in necessitatibus nihil nisi pariatur voluptas. Atque beatae cupiditate ea earum eos laudantium, nam?</span><span>Ab, aliquid incidunt. Aperiam error exercitationem illo numquam tenetur? Accusantium animi dolore dolores eaque ex exercitationem expedita ipsam nesciunt numquam perferendis placeat possimus, quam qui, reiciendis saepe temporibus veniam, voluptatibus?</span>
-            </p>
+        <div class="col col-auto card px-0 mx-2">
+            <h5 class="text-center card-header bg-black bg-opacity-10">Nasdaq fails to deliver list</h5>
+            <div class="card-body p-0">
+                <table class="table table-hover table-sm w-100 mb-0">
+                    <thead>
+                    <tr class="text-center bg-black bg-opacity-10">
+                        <td><h6 class="mb-0">Ticker</h6></td>
+                        <td><h6 class="mb-0">Ticker name</h6></td>
+                        <td><h6 class="mb-0">Trade status</h6></td>
+                    </tr>
+                    </thead>
+                    <tbody class="border-top-0">
+                    {% for fail in fails_to_deliver %}
+                    {% if fail.5|striptags == 'tradable' %}
+                    <tr class="table-danger">
+                        {% else %}
+                    <tr class="bg-light">
+                        {% endif %}
+                        <td class="py-0">
+                            <a href="https://finance.yahoo.com/quote/{{ fail.0|striptags }}/key-statistics?p={{ fail.0|striptags }}"
+                               target="_blank">{{ fail.0|striptags }}</a></td>
+                        <td class="py-0">{{ fail.1|striptags }}</td>
+                        <td class="py-0 small">{{ fail.5|striptags }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-muted text-center py-0">
+                <a href="https://nasdaqtrader.com/trader.aspx?id=RegSHOThreshold" target="_blank">
+                    <span class="small">link to source</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
 
 <script src="{% static 'js/cnnFearAndGreed.js' %}"></script>
 <script src="{% static 'js/finvizFutures.js' %}"></script>
+<script src="{% static 'js/getTopNews.js' %}"></script>
 
 {% endblock %}

@@ -66,6 +66,14 @@ class News(models.Model):
         verbose_name_plural = 'новости'
         ordering = ['-pubDate']
 
+    # def as_json(self):
+    #     return dict(
+    #         description=self.description,
+    #         link=self.link,
+    #         pubDate=self.pubDate,
+    #         title=self.title
+    #     )
+
 
 class Preference(models.Model):
     name = models.CharField(verbose_name='name', max_length=40, unique=True)
