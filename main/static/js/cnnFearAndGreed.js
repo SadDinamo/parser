@@ -61,7 +61,7 @@ function getCnnFearAndGreedData() {
 
 getCnnFearAndGreedData();
 
-let interval_cnnFearAndGreed = 1000 * 60 * 5; // refresh data every ... milliseconds
+let interval_cnnFearAndGreed = 1000 * 60 * 15; // refresh data every ... milliseconds
 setInterval(() => {
     getCnnFearAndGreedData();
 }, interval_cnnFearAndGreed); // milli sec
