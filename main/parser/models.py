@@ -93,3 +93,8 @@ class Preference(models.Model):
     def get_delete_url(self):
         return reverse('preference_delete', kwargs={'pk': self.pk})
 
+
+class ServiceVariables(models.Model):
+    name = models.CharField(verbose_name='name', max_length=80, unique=True)
+    value = models.CharField(verbose_name='value', max_length=80, null=True)
+

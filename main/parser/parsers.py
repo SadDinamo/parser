@@ -1,7 +1,7 @@
 import requests, time
 from requests.adapters import HTTPAdapter, Retry
 from bs4 import BeautifulSoup
-from .models import News, NewsKeyWord, Share, Preference
+from .models import News, NewsKeyWord, Share, Preference, ServiceVariables
 from datetime import datetime
 from django.contrib import messages
 from django.http import JsonResponse
@@ -9,11 +9,6 @@ from django.conf import settings
 from django.core.mail import send_mail, EmailMessage
 import json
 
-
-current_ticker_counter = 0
-total_tickers = 0
-ticker_name = ''
-yahoo_ticker_update = False
 
 HEADERS = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
@@ -123,21 +118,30 @@ def getTickerCode(ticker: Share):
 
 def get_yahoo_ajax_progress_bar(request):
     global current_ticker_counter, total_tickers, ticker_name, yahoo_ticker_update
-    result = {'total_tickers': total_tickers,
-              'current_ticker_counter': current_ticker_counter,
-              'ticker_name': ticker_name,
-              'yahoo_ticker_update': yahoo_ticker_update
+    result = {'total_tickers': ServiceVariables.objects.filter(name='total_tickers').first().value,
+              'current_ticker_counter': ServiceVariables.objects.filter(name='current_ticker_counter').first().value,
+              'ticker_name': ServiceVariables.objects.filter(name='ticker_name').first().value,
+              'yahoo_ticker_update': ServiceVariables.objects.filter(name='yahoo_ticker_update').first().value == 'True'
               }
     return JsonResponse(result)
 
 
 def parse(request):
-    global current_ticker_counter, total_tickers, ticker_name, yahoo_ticker_update
-    yahoo_ticker_update = True
-    tickers = Share.objects.all()
-    total_tickers = Share.objects.count()
-    current_ticker_counter = 0
+    # global current_ticker_counter, total_tickers, ticker_name, yahoo_ticker_update
+    yahoo_ticker_update = ServiceVariables.objects.filter(name='yahoo_ticker_update').first()
+    yahoo_ticker_update.value = 'True'
+    yahoo_ticker_update.save()
+
+    total_tickers = ServiceVariables.objects.filter(name='total_tickers').first()
+    total_tickers.value = str(Share.objects.count())
+    total_tickers.save()
+
+    current_ticker_counter = ServiceVariables.objects.filter(name='current_ticker_counter').first()
+    current_ticker_counter.value = '0'
+    current_ticker_counter.save()
+
     html_template = Preference.objects.filter(name='YahooNewsHtmlMessageTemplate').first()
+    tickers = Share.objects.all()
     for ticker in tickers:
         xml = getHtml(getTickerCode(ticker))
         if xml.status_code == 200:  # success
@@ -167,19 +171,33 @@ def parse(request):
                                   settings.RECIPIENT_LIST,
                                   html_message=current_html,
                                   )
-            current_ticker_counter += 1
-            ticker_name = getTickerCode(ticker)
+
+            current_ticker_counter.value = str(int(current_ticker_counter) + 1)
+            current_ticker_counter.save()
+
+            ticker_name = ServiceVariables.objects.filter(name='ticker_name').first()
+            ticker_name.value = getTickerCode(ticker)
+            ticker_name.save()
         else:
             print('Error on server side: ' + xml.status_code)
-    yahoo_ticker_update = False
+    yahoo_ticker_update.value = 'False'
+    yahoo_ticker_update.save()
     messages.add_message(request, messages.SUCCESS, 'Yahoo.Finance news info update finished')
 
+
 def parse_jahoo_finance_news_background(request):
-    global current_ticker_counter, total_tickers, ticker_name, yahoo_ticker_update
-    yahoo_ticker_update = True
+    yahoo_ticker_update = ServiceVariables.objects.filter(name='yahoo_ticker_update').first()
+    yahoo_ticker_update.value = 'True'
+    yahoo_ticker_update.save()
+    total_tickers = ServiceVariables.objects.filter(name='total_tickers').first()
+    total_tickers.value = str(Share.objects.count())
+    total_tickers.save()
+
+    current_ticker_counter = ServiceVariables.objects.filter(name='current_ticker_counter').first()
+    current_ticker_counter.value = '0'
+    current_ticker_counter.save()
+
     tickers = Share.objects.all()
-    total_tickers = Share.objects.count()
-    current_ticker_counter = 0
     for ticker in tickers:
         xml = getHtml(getTickerCode(ticker))
         if xml.status_code == 200:  # success
@@ -197,8 +215,16 @@ def parse_jahoo_finance_news_background(request):
                             title=news_item.find('title').get_text(),
                         )
                         new_news_item.save()
-            current_ticker_counter += 1
-            ticker_name = getTickerCode(ticker)
+
+            current_ticker_counter.value = str(int(current_ticker_counter.value) + 1)
+            current_ticker_counter.save()
+
+            ticker_name = ServiceVariables.objects.filter(name='ticker_name').first()
+            ticker_name.value = getTickerCode(ticker)
+            ticker_name.save()
+
         else:
             print('Error on server side: ' + xml.status_code)
-    yahoo_ticker_update = False
+    yahoo_ticker_update.value = 'False'
+    yahoo_ticker_update.save()
+

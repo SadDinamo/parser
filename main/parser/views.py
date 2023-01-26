@@ -125,9 +125,9 @@ def get_top_news(request):
 
 
 def launch_news_update_background(request):
-    if not yahoo_ticker_update:
+    if ServiceVariables.objects.filter(name='yahoo_ticker_update').first().value == 'False':
         parse_jahoo_finance_news_background(request)
-    return True
+    return JsonResponse(1, safe=False)
 
 
 def get_news_update_status(request):
@@ -175,6 +175,31 @@ def check_default_preferencies(request):
                                      'Use \'+new_news_item.title+\'  \'+new_news_item.pubDate+\'  ' \
                                      '\'+new_news_item.description+\'  \'+new_news_item.link+\''
         new_preference.save()
+
+    if not ServiceVariables.objects.filter(name='current_ticker_counter').first():
+        new_ServiceVariable = ServiceVariables()
+        new_ServiceVariable.name = 'current_ticker_counter'
+        new_ServiceVariable.value = ''
+        new_ServiceVariable.save()
+
+    if not ServiceVariables.objects.filter(name='total_tickers').first():
+        new_ServiceVariable = ServiceVariables()
+        new_ServiceVariable.name = 'total_tickers'
+        new_ServiceVariable.value = ''
+        new_ServiceVariable.save()
+
+    if not ServiceVariables.objects.filter(name='ticker_name').first():
+        new_ServiceVariable = ServiceVariables()
+        new_ServiceVariable.name = 'ticker_name'
+        new_ServiceVariable.value = ''
+        new_ServiceVariable.save()
+
+    if not ServiceVariables.objects.filter(name='yahoo_ticker_update').first():
+        new_ServiceVariable = ServiceVariables()
+        new_ServiceVariable.name = 'yahoo_ticker_update'
+        new_ServiceVariable.value = ''
+        new_ServiceVariable.save()
+
     return redirect('preferences')
 
 
@@ -184,6 +209,10 @@ def reset_to_defaults(request):
         if pref.default_value != None and pref.default_value != '':
             pref.value = pref.default_value
             pref.save()
+    if ServiceVariables.objects.filter(name='yahoo_ticker_update').first():
+        ServiceVariable = ServiceVariables.objects.filter(name='yahoo_ticker_update').first()
+        ServiceVariable.value = 'False'
+        ServiceVariable.save()
     return redirect('preferences')
 
 
