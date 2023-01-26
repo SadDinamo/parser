@@ -79,14 +79,9 @@
                 </li>
             </ul>
         </div>
-
-        <i class="fa-solid fa-cog fa-spin"></i>
-        <div class="small mb-0 mx-2 navbar-text">Updating news...</div>
-        <button class="me-2 btn btn-secondary btn-sm">Hide</button>
-
+        <div id="updating-news-label" class="small mb-0 mx-2 navbar-text d-none"></div>
+        <i id="updating-news-wheel" class="fa-solid fa-cog fa-spin d-none"></i>
     </div>
-
-
 </nav>
 
 <!--   Toasts section   -->
@@ -126,22 +121,6 @@
                         </div>
                     </div>
                     <div id="yahooFinanceProgressBarLabel" class="mr-auto"></div>
-                </div>
-            </div>
-            <div class="d-flex flex-column border-top modal-body">
-                <div class="form-check">
-                    <input id="check-send-email-notifications" class="form-check-input" type="checkbox" value=""
-                           id="CheckboxEmailNotification"
-                           checked="true">
-                    <label class="form-check-label" for="CheckboxEmailNotification">
-                        Send e-mail notifications
-                    </label>
-                </div>
-                <div class="input-group input-group-sm mb-0">
-                    <span class="input-group-text" id="news-parser-input-area">E-mail recipient list</span>
-                    <input type="email" class="form-control" id="news-parser-email-input"
-                           aria-label="news parser input area"
-                           aria-describedby="news-parser-input-area">
                 </div>
             </div>
 

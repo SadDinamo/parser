@@ -124,6 +124,17 @@ def get_top_news(request):
     return JsonResponse(result, safe=False)
 
 
+def launch_news_update_background(request):
+    if not yahoo_ticker_update:
+        parse_jahoo_finance_news_background(request)
+    return True
+
+
+def get_news_update_status(request):
+    result = get_yahoo_ajax_progress_bar(request)
+    return result
+
+
 def yahoo_parser_news(request):
     parse(request)
     return redirect('news_table_report', page=1)

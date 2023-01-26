@@ -10,6 +10,11 @@ from django.core.mail import send_mail, EmailMessage
 import json
 
 
+current_ticker_counter = 0
+total_tickers = 0
+ticker_name = ''
+yahoo_ticker_update = False
+
 HEADERS = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
     'accept': '*/*',
@@ -116,12 +121,6 @@ def getTickerCode(ticker: Share):
     return ticker_corrected
 
 
-current_ticker_counter = 0
-total_tickers = 0
-ticker_name = ''
-yahoo_ticker_update = False
-
-
 def get_yahoo_ajax_progress_bar(request):
     global current_ticker_counter, total_tickers, ticker_name, yahoo_ticker_update
     result = {'total_tickers': total_tickers,
@@ -174,3 +173,32 @@ def parse(request):
             print('Error on server side: ' + xml.status_code)
     yahoo_ticker_update = False
     messages.add_message(request, messages.SUCCESS, 'Yahoo.Finance news info update finished')
+
+def parse_jahoo_finance_news_background(request):
+    global current_ticker_counter, total_tickers, ticker_name, yahoo_ticker_update
+    yahoo_ticker_update = True
+    tickers = Share.objects.all()
+    total_tickers = Share.objects.count()
+    current_ticker_counter = 0
+    for ticker in tickers:
+        xml = getHtml(getTickerCode(ticker))
+        if xml.status_code == 200:  # success
+            bs_content = BeautifulSoup(xml.text, 'xml')
+            items = bs_content.find_all('item')
+            news_key_words = NewsKeyWord.objects.all()
+            for news_item in items:
+                for news_key_word in news_key_words:
+                    if news_item.find('title').get_text().find(news_key_word.keyword) > 0 \
+                            and not News.objects.filter(title=news_item.find('title').get_text()):
+                        new_news_item = News(
+                            description=news_item.find('description').get_text(),
+                            link=news_item.find('link').get_text(),
+                            pubDate=datetime.strptime(news_item.find('pubDate').get_text(), '%a, %d %b %Y %H:%M:%S %z'),
+                            title=news_item.find('title').get_text(),
+                        )
+                        new_news_item.save()
+            current_ticker_counter += 1
+            ticker_name = getTickerCode(ticker)
+        else:
+            print('Error on server side: ' + xml.status_code)
+    yahoo_ticker_update = False

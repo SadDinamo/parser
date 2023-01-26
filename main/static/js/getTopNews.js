@@ -15,7 +15,6 @@ function getTopNews(NewsCount) {
             success: function (data) {
                 if (data) {
                     document.getElementById("top-news-section").innerHTML = '';
-                    console.log(data);
                     for (let i = 0; i < data.length; i++) {
                         let card_wrapper = document.createElement('div');
                         card_wrapper.className = 'col-lg-3 col-sm-6 px-0 py-1';
