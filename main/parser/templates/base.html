@@ -78,9 +78,13 @@
                     </ul>
                 </li>
             </ul>
-            <div class='d-flex'>
-                <div id="updating-news-label" class="small mb-0 mx-2 navbar-text d-none"></div>
-                <i id="updating-news-wheel" class="fa-solid fa-cog fa-spin d-none navbar-text h-100 py-auto fs-5"></i>
+            <div>
+                <div id="updating-news-label" class="small mb-0 mx-0 navbar-text d-none"></div>
+                <i id="updating-news-wheel" class="fa-solid fa-cog fa-spin d-none"></i>
+                <div class="progress" style="height: 3px;">
+                    <div class="progress-bar bg-secondary" id="updating-news-progressbar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -23,8 +23,8 @@ document.getElementById('yahoo_parser_news_show-btn').addEventListener('click', 
                     if (data['yahoo_ticker_update']) {
                         let percent = (Math.floor((data['current_ticker_counter'] / data['total_tickers']) * 100)).toString();
                         document.getElementById('yahooFinanceProgressBarLabel').innerText = percent + '% : ' + data['ticker_name'];
-                        document.getElementById('yahooFinanceProgressBar').setAttribute('aria-valuenow', percent);
-                        document.getElementById("yahooFinanceProgressBar").style.setProperty('width', percent + '%');
+                        document.getElementById('progress-bar').setAttribute('aria-valuenow', percent);
+                        document.getElementById("progress-bar").style.setProperty('width', percent + '%');
                     } else {
                         document.getElementById('yahooFinanceProgressBarLabel').innerText = '';
                         document.getElementById('yahooFinanceProgressBar').setAttribute('aria-valuenow', 0);

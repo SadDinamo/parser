@@ -1,4 +1,3 @@
-
 function launchNewsUpdateBackground() {
     if (true) {
         $.ajax({
@@ -30,13 +29,18 @@ function getNewsUpdateStatus() {
             // mode: 'same-origin', // Do not send CSRF token to another domain.
             success: function (data) {
                 if (data) {
-                    if (data['yahoo_ticker_update']){
+                    if (data['yahoo_ticker_update']) {
                         document.getElementById('updating-news-wheel').classList.remove('d-none');
                         document.getElementById('updating-news-label').classList.remove('d-none');
+                        document.getElementById('updating-news-label').classList.add('d-inline');
                         document.getElementById('updating-news-label').innerText = 'News update ' +
                             data['current_ticker_counter'].toString() + ' of ' + data['total_tickers'].toString();
+                        let percent = (Math.floor((data['current_ticker_counter'] / data['total_tickers']) * 100)).toString();
+                        document.getElementById('updating-news-progressbar').setAttribute('aria-valuenow', percent);
+                        document.getElementById("updating-news-progressbar").style.setProperty('width', percent + '%');
                     } else {
                         document.getElementById('updating-news-wheel').classList.add('d-none');
+                        document.getElementById('updating-news-label').classList.remove('d-inline');
                         document.getElementById('updating-news-label').classList.add('d-none');
                         document.getElementById('updating-news-label').innerText = '';
                     }
