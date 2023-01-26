@@ -1,5 +1,5 @@
 
-let newsCount = 24; // Количесто карточек-новостей к показу на сайте
+let newsCount = 12; // Количесто карточек-новостей к показу на сайте
 
 function getTopNews(NewsCount) {
     // Ajax
