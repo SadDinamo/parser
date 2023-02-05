@@ -13,6 +13,12 @@ function getCnnFearAndGreedData() {
             // mode: 'same-origin', // Do not send CSRF token to another domain.
             success: function (data) {
                 if (data) {
+                    let greedLink = document.createElement('a');
+                    greedLink.setAttribute('href', 'https://edition.cnn.com/markets/fear-and-greed');
+                    greedLink.setAttribute('target', '_blank');
+                    greedLink.innerText = 'CNN fear and greed index';
+                    document.getElementById('cnn-fear-and-greed-name').innerHTML='';
+                    document.getElementById('cnn-fear-and-greed-name').append(greedLink);
                     document.getElementById("cnn-fear-and-greed-value").innerText =
                         '' + Math.round(data['fear_and_greed']['score']);
                     document.getElementById("cnn-fear-and-greed-change").innerText =

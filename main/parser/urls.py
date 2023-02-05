@@ -27,6 +27,7 @@ urlpatterns = [
     path('get_top_news', get_top_news, name='get_top_news'),
     path('get_news_update_status', get_news_update_status, name='get_news_update_status'),
     path('launch_news_update_background', launch_news_update_background, name='launch_news_update_background'),
+    path('get_top_shorts', get_finviz_top_shorts, name='get_top_shorts'),
     path('ttest',  ttest, name='ttest'),
 ]
 

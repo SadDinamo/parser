@@ -135,6 +135,11 @@ def get_news_update_status(request):
     return result
 
 
+def get_finviz_top_shorts(request):
+    result = getHtmlFinvizTopShorts()
+    return JsonResponse(result, safe=False)
+
+
 def yahoo_parser_news(request):
     parse(request)
     return redirect('news_table_report', page=1)

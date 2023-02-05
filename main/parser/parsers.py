@@ -68,6 +68,26 @@ def getHtmlNasdaqFailsToDeliverList(params=None):
     return table
 
 
+def getHtmlFinvizTopShorts(params=None):
+    tickers = Share.objects.all()
+    shorts = []
+    url = 'https://finviz.com/screener.ashx?v=111&f=cap_microover&o=-shortinterestshare'
+    s = requests.Session()
+    retries = Retry(total=5,
+                    backoff_factor=0.5,
+                    status_forcelist=[500, 502, 503, 504])
+    s.mount(url, HTTPAdapter(max_retries=retries))
+    html = s.get(url, headers=HEADERS, timeout=5, params=params)
+    if html.status_code == 200:  # success
+        bs_content = BeautifulSoup(html.text, 'html.parser')
+        div = bs_content.find(id='screener-views-table')
+        sub_div = div.findAll('a', attrs={'class': 'screener-link-primary'})
+        for item in sub_div:
+            if tickers.filter(ticker=item.text):
+                shorts.append(item.text)
+    return shorts
+
+
 def getCnnFearAndGreedStats(request):
     url = 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata/'
     s = requests.Session()
@@ -75,13 +95,14 @@ def getCnnFearAndGreedStats(request):
                     backoff_factor=0.5,
                     status_forcelist=[500, 502, 503, 504])
     s.mount(url, HTTPAdapter(max_retries=retries))
-    html = s.get(url, headers=HEADERS_CNN, timeout=5)
+    html = s.get(url, headers=HEADERS_CNN, timeout=15)
     if html.status_code == 200:  # success
         bs_content = BeautifulSoup(html.text, 'html.parser')
         result = json.loads(bs_content.text)
     else:
         result = html.content
     return JsonResponse(result)
+
 
 def getFinvizFuturesData(request):
     url = 'https://finviz.com/api/futures_all.ashx?timeframe=d1'

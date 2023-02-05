@@ -6,13 +6,13 @@
 
 <div class="container-fluid">
     <div class="row mt-2 d-flex align-items-start">
-        <div class="col col-12 col-xxl-6" id="newsColumn">
+        <div class="col col-12" id="newsColumn">
             <h5 class="text-center">Latest news</h5>
             <div class="col">
                 <div id="top-news-section" class="col d-flex justify-content-evenly flex-wrap"></div>
             </div>
         </div>
-        <div class="col col-auto card px-0 mx-2">
+        <div class="col col-auto card px-0 mx-2" id="indexes">
             <h5 class="text-center card-header bg-black bg-opacity-10">Indexes</h5>
             <div class="card-body p-0">
                 <table class="table table-hover table-sm w-100 mb-0">
@@ -97,7 +97,7 @@
                 </div>
             </div>
         </div>
-        <div class="col col-auto card px-0 mx-2">
+        <div class="col col-auto card px-0 mx-2" id="nasdaq-fail-to-deliver">
             <h5 class="text-center card-header bg-black bg-opacity-10">Nasdaq fails to deliver list</h5>
             <div class="card-body p-0">
                 <table class="table table-hover table-sm w-100 mb-0">
@@ -131,6 +131,21 @@
                 </a>
             </div>
         </div>
+        <div class="col col-auto card px-0 mx-2" id="top-shorts">
+            <h5 class="text-center card-header bg-black bg-opacity-10">Top shorted shares</h5>
+            <div class="card-body p-0">
+                <table class="table table-hover table-sm w-100 mb-0">
+                    <thead>
+                    <tr class="text-center bg-black bg-opacity-10">
+                        <td><h6 class="mb-0">Ticker</h6></td>
+                    </tr>
+                    </thead>
+                    <tbody class="border-top-0" id="top-shorts-table-body">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="col col-auto card px-0 mx-2">
             <a target="_blank" href="https://finviz.com/screener.ashx?v=111&f=cap_microover&o=-shortinterestshare">
                 Short squeeze
@@ -142,6 +157,7 @@
 
 <script src="{% static 'js/cnnFearAndGreed.js' %}"></script>
 <script src="{% static 'js/finvizFutures.js' %}"></script>
+<script src="{% static 'js/finvizShorts.js' %}"></script>
 <script src="{% static 'js/getTopNews.js' %}"></script>
 <script src="{% static 'js/update-news-status.js' %}"></script>
 

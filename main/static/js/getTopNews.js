@@ -17,7 +17,7 @@ function getTopNews(NewsCount) {
                     document.getElementById("top-news-section").innerHTML = '';
                     for (let i = 0; i < data.length; i++) {
                         let card_wrapper = document.createElement('div');
-                        card_wrapper.className = 'col-lg-3 col-sm-6 px-0 py-1';
+                        card_wrapper.className = 'col-lg-2 col-md-3 col-sm-12  px-1 py-1 news-card';
                         document.getElementById("top-news-section").append(card_wrapper);
 
                         let card_link = document.createElement('a');
@@ -28,7 +28,7 @@ function getTopNews(NewsCount) {
                         card_wrapper.append(card_link);
 
                         let card_div = document.createElement('div');
-                        card_div.className = 'card mx-1 h-100';
+                        card_div.className = 'card h-100';
                         card_link.append(card_div);
 
                         let card_header = document.createElement('div');
