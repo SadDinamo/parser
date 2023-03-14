@@ -88,6 +88,23 @@ def getHtmlFinvizTopShorts(params=None):
     return shorts
 
 
+def getFinvizCrypto(params=None):
+    url = 'https://finviz.com/api/crypto_all.ashx?timeframe=m5'
+    s = requests.Session()
+    retries = Retry(total=5,
+                    backoff_factor=0.5,
+                    status_forcelist=[500, 502, 503, 504])
+    s.mount(url, HTTPAdapter(max_retries=retries))
+    html = s.get(url, headers=HEADERS_CNN, timeout=5)
+    if html.status_code == 200:  # success
+        bs_content = BeautifulSoup(html.text, 'html.parser')
+        result = json.loads(bs_content.text)
+        print(result)
+    else:
+        result = html.content
+    return JsonResponse(result)
+
+
 def getCnnFearAndGreedStats(request):
     url = 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata/'
     s = requests.Session()

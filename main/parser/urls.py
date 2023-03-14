@@ -24,10 +24,12 @@ urlpatterns = [
     path('news_key_words_delete/<int:pk>/', NewsKeyWordsDelete.as_view(), name='news_key_words_delete'),
     path('get_cnn_fear_and_greed_stats', get_cnn_fear_and_greed_stats, name='get_cnn_fear_and_greed_stats'),
     path('get_finviz_futures_data', get_finviz_futures_data, name='get_finviz_futures_data'),
+    path('get_finviz_crypto_data', get_finviz_crypto_data, name='get_finviz_crypto_data'),
     path('get_top_news', get_top_news, name='get_top_news'),
     path('get_news_update_status', get_news_update_status, name='get_news_update_status'),
     path('launch_news_update_background', launch_news_update_background, name='launch_news_update_background'),
     path('get_top_shorts', get_finviz_top_shorts, name='get_top_shorts'),
+    path('get_candles', get_candles, name='get_candles'),
     path('ttest',  ttest, name='ttest'),
 ]
 

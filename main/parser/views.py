@@ -13,11 +13,14 @@ from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage
 from django.core import serializers
 from django.http import JsonResponse
+from .tks import *
 
-TOKEN = os.environ["INVEST_TOKEN"]
+TOKEN = os.environ['INVEST_TOKEN']
 
-# class WelcomeScreen(generic.TemplateView):
-#     template_name = 'parser/welcomeScreen.html'
+
+def get_candles(request, figi='BBG001K7WBT8'):
+    candle_data = get_5minutes_candles(request, figi)
+    return JsonResponse(candle_data, safe=False)
 
 
 def welcome_screen(request):
@@ -114,6 +117,11 @@ def get_cnn_fear_and_greed_stats(request):
 
 def get_finviz_futures_data(request):
     result = getFinvizFuturesData(request)
+    return result
+
+
+def get_finviz_crypto_data(request):
+    result = getFinvizCrypto(request)
     return result
 
 

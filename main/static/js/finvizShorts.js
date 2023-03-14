@@ -11,7 +11,6 @@ function getFinvizShorts() {
             // mode: 'same-origin', // Do not send CSRF token to another domain.
             success: function (data) {
                 if (data) {
-                    console.log(data);
                     let tableBody = document.getElementById('top-shorts-table-body');
                     tableBody.innerHTML = '';
                     for (let i = 0; i < data.length; i++) {
