@@ -44,7 +44,7 @@ function getCnnFearAndGreedData() {
                     toastButtonClose.setAttribute('aria-label', 'Close');
                     toastHeader.append(toastHeaderText, toastButtonClose);
                     let toast = document.createElement('div');
-                    toast.className = 'toast hide align-items-center border-0';
+                    toast.className = 'toast hide align-items-center border-0 text-bg-success';
                     toast.setAttribute('role', 'alert');
                     toast.setAttribute('aria-live', 'assertive');
                     toast.setAttribute('aria-atomic', 'true');

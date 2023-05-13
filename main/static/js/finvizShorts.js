@@ -15,7 +15,6 @@ function getFinvizShorts() {
                     tableBody.innerHTML = '';
                     for (let i = 0; i < data.length; i++) {
                         let row = document.createElement('tr');
-                        row.className = 'bg-light';
                         let cell = document.createElement(`td`);
                         cell.className = 'py-0';
                         let link = document.createElement('a');
