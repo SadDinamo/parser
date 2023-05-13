@@ -17,7 +17,7 @@ function getTopNews(NewsCount) {
                     document.getElementById("top-news-section").innerHTML = '';
                     for (let i = 0; i < data.length; i++) {
                         let card_wrapper = document.createElement('div');
-                        card_wrapper.className = 'col-lg-2 col-md-3 col-sm-12  px-1 py-1 news-card';
+                        card_wrapper.className = 'col-lg-6 col-md-12 px-1 py-1 news-card';
                         document.getElementById("top-news-section").append(card_wrapper);
 
                         let card_link = document.createElement('a');

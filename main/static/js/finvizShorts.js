@@ -20,8 +20,8 @@ function getFinvizShorts() {
                         cell.className = 'py-0';
                         let link = document.createElement('a');
                         link.setAttribute('target', '_blank');
-                        link. setAttribute('href','https://finance.yahoo.com/quote/' + data[i] +
-                            '/key-statistics?p=' + data[i]);
+                        link.setAttribute('href','https://www.tipranks.com/stocks/' + data[i] +
+                            '/earnings');
                         link.innerText = data[i];
                         cell.append(link);
                         row.append(cell);

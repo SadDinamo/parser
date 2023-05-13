@@ -8,6 +8,7 @@ from .models import *
 from django.contrib import messages
 import datetime
 from .parsers import *
+from .finance_calendar import get_all_finance_calendar_events
 from .forms import PreferenceForm, NewsKeyWordForm
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage
@@ -130,6 +131,11 @@ def get_top_news(request):
     top_pub_dates = News.objects.order_by('-pubDate').values()
     result = list(top_pub_dates[:int(news_count)])
     return JsonResponse(result, safe=False)
+
+
+def get_calendar_events(request):
+    events = get_all_finance_calendar_events(request)
+    return JsonResponse(events, safe=False)
 
 
 def launch_news_update_background(request):

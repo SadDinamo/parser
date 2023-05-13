@@ -30,6 +30,7 @@ urlpatterns = [
     path('launch_news_update_background', launch_news_update_background, name='launch_news_update_background'),
     path('get_top_shorts', get_finviz_top_shorts, name='get_top_shorts'),
     path('get_candles', get_candles, name='get_candles'),
+    path('get_calendar_events', get_calendar_events, name='get_calendar_events'),
     path('ttest',  ttest, name='ttest'),
 ]
 

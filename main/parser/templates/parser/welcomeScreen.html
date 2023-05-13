@@ -4,15 +4,26 @@
 
 {% block content %}
 
-<div class="container-fluid">
-    <div class="row mt-2 d-flex align-items-start">
-        <div class="col col-12" id="newsColumn">
-            <h5 class="text-center">Latest news</h5>
-            <div class="col">
-                <div id="top-news-section" class="col d-flex justify-content-evenly flex-wrap"></div>
+<div class="container-fluid col col-8 d-flex mt-3 flex-wrap">
+    <div class="col col-12 col-lg-8">
+        <div class="col col-auto card px-0 mx-2" id="top-shorts">
+            <h5 class="text-center card-header bg-black bg-opacity-10">Top shorted shares</h5>
+            <div class="card-body p-0">
+                <table class="table table-hover table-sm w-100 mb-0">
+                    <thead>
+                    <tr class="text-center bg-black bg-opacity-10">
+                        <td><h6 class="mb-0">Ticker</h6></td>
+                    </tr>
+                    </thead>
+                    <tbody class="border-top-0" id="top-shorts-table-body">
+
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="col col-auto card px-0 mx-2" id="indexes">
+    </div>
+    <div class="col col-12 col-lg-4">
+        <div class="col card px-0 mx-0" id="indexes">
             <h5 class="text-center card-header bg-black bg-opacity-10">Indexes</h5>
             <div class="card-body p-0">
                 <table class="table table-hover table-sm w-100 mb-0">
@@ -83,63 +94,49 @@
                 </table>
             </div>
         </div>
-        <div class="col col-auto card px-0 mx-2" id="nasdaq-fail-to-deliver">
-            <h5 class="text-center card-header bg-black bg-opacity-10">Nasdaq fails to deliver list</h5>
-            <div class="card-body p-0">
-                <table class="table table-hover table-sm w-100 mb-0">
-                    <thead>
-                    <tr class="text-center bg-black bg-opacity-10">
-                        <td><h6 class="mb-0">Ticker</h6></td>
-                        <td><h6 class="mb-0">Ticker name</h6></td>
-                        <td><h6 class="mb-0">Trade status</h6></td>
-                    </tr>
-                    </thead>
-                    <tbody class="border-top-0">
-                    {% for fail in fails_to_deliver %}
-                    {% if fail.5|striptags == 'tradable' %}
-                    <tr class="table-danger">
-                        {% else %}
-                    <tr class="bg-light">
-                        {% endif %}
-                        <td class="py-0">
-                            <a href="https://finance.yahoo.com/quote/{{ fail.0|striptags }}/key-statistics?p={{ fail.0|striptags }}"
-                               target="_blank">{{ fail.0|striptags }}</a></td>
-                        <td class="py-0">{{ fail.1|striptags }}</td>
-                        <td class="py-0 small">{{ fail.5|striptags }}</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+        <div class="col" id="newsColumn">
+            <h5 class="text-center">Latest news</h5>
+            <div class="col">
+                <div id="top-news-section" class="col d-flex justify-content-evenly flex-wrap"></div>
             </div>
-            <div class="card-footer text-muted text-center py-0">
-                <a href="https://nasdaqtrader.com/trader.aspx?id=RegSHOThreshold" target="_blank">
-                    <span class="small">link to source</span>
-                </a>
-            </div>
-        </div>
-        <div class="col col-auto card px-0 mx-2" id="top-shorts">
-            <h5 class="text-center card-header bg-black bg-opacity-10">Top shorted shares</h5>
-            <div class="card-body p-0">
-                <table class="table table-hover table-sm w-100 mb-0">
-                    <thead>
-                    <tr class="text-center bg-black bg-opacity-10">
-                        <td><h6 class="mb-0">Ticker</h6></td>
-                    </tr>
-                    </thead>
-                    <tbody class="border-top-0" id="top-shorts-table-body">
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col col-auto card px-0 mx-2">
-            <a target="_blank" href="https://finviz.com/screener.ashx?v=111&f=cap_microover&o=-shortinterestshare">
-                Short squeeze
-            </a>
-            <p>GetCandles !!! - volume by day increments -> graph</p>
         </div>
     </div>
 </div>
+<div class="col col-auto card px-0 mx-2" id="nasdaq-fail-to-deliver">
+    <h5 class="text-center card-header bg-black bg-opacity-10">Nasdaq fails to deliver list</h5>
+    <div class="card-body p-0">
+        <table class="table table-hover table-sm w-100 mb-0">
+            <thead>
+            <tr class="text-center bg-black bg-opacity-10">
+                <td><h6 class="mb-0">Ticker</h6></td>
+                <td><h6 class="mb-0">Ticker name</h6></td>
+                <td><h6 class="mb-0">Trade status</h6></td>
+            </tr>
+            </thead>
+            <tbody class="border-top-0">
+            {% for fail in fails_to_deliver %}
+            {% if fail.5|striptags == 'tradable' %}
+            <tr class="table-danger">
+                {% else %}
+            <tr class="bg-light">
+                {% endif %}
+                <td class="py-0">
+                    <a href="https://finance.yahoo.com/quote/{{ fail.0|striptags }}/key-statistics?p={{ fail.0|striptags }}"
+                       target="_blank">{{ fail.0|striptags }}</a></td>
+                <td class="py-0">{{ fail.1|striptags }}</td>
+                <td class="py-0 small">{{ fail.5|striptags }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted text-center py-0">
+        <a href="https://nasdaqtrader.com/trader.aspx?id=RegSHOThreshold" target="_blank">
+            <span class="small">link to source</span>
+        </a>
+    </div>
+</div>
+
 
 <script src="{% static 'js/cnnFearAndGreed.js' %}"></script>
 <script src="{% static 'js/finvizFutures.js' %}"></script>
