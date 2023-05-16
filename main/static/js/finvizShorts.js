@@ -16,14 +16,24 @@ function getFinvizShorts() {
                     for (let i = 0; i < data.length; i++) {
                         let row = document.createElement('tr');
                         let cell = document.createElement(`td`);
-                        cell.className = 'py-0';
                         let link = document.createElement('a');
                         link.setAttribute('target', '_blank');
-                        link.setAttribute('href','https://www.tipranks.com/stocks/' + data[i] +
+                        link.setAttribute('href','https://www.tipranks.com/stocks/' + data[i][0] +
                             '/earnings');
-                        link.innerText = data[i];
+                        link.className = 'link-offset-1 link-offset-2-hover link-underline link-underline-opacity-0 ' +
+                            'link-underline-opacity-75-hover';
+                        link.innerText = data[i][0];
                         cell.append(link);
+                        cell.className = 'ps-2';
                         row.append(cell);
+                        let cell_short_float = document.createElement('td');
+                        cell_short_float.innerText = data[i][1];
+                        cell_short_float.className = 'text-center';
+                        row.append(cell_short_float);
+                        let cell_short_ratio = document.createElement('td');
+                        cell_short_ratio.innerText = data[i][2];
+                        cell_short_ratio.className = 'text-center';
+                        row.append(cell_short_ratio);
                         tableBody.append(row);
                     }
                 } else {

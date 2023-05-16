@@ -4,8 +4,8 @@
 
 {% block content %}
 
-<div class="container-fluid col col-12 col-lg-8 d-flex mt-3 flex-wrap">
-    <div class="col col-12 col-lg-8">
+<div class="container-fluid col col-12 col-xl-10 col-xxl-8 d-flex mt-3 flex-wrap">
+    <div class="col col-12 col-xxl-8">
         <div class="col col-auto card px-0 mx-2" id="top-shorts">
             <h5 class="text-center card-header bg-black bg-opacity-10">Top shorted shares</h5>
             <div class="card-body p-0">
@@ -13,16 +13,21 @@
                     <thead>
                     <tr class="text-center bg-black bg-opacity-10">
                         <td><h6 class="mb-0">Ticker</h6></td>
+                        <td><h6 class="mb-0">Short float %</h6></td>
+                        <td><h6 class="mb-0">Short ratio</h6></td>
+                        <td><h6 class="mb-0">Report date</h6></td>
+                        <td><h6 class="mb-0">Consensus EPS</h6></td>
+                        <td><h6 class="mb-0">Analyst consensus</h6></td>
+                        <td><h6 class="mb-0">Failed to deliver</h6></td>
                     </tr>
                     </thead>
                     <tbody class="border-top-0" id="top-shorts-table-body">
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col col-12 col-lg-4">
+    <div class="col col-12 col-xxl-4">
         <div class="col card px-0 mx-0" id="indexes">
             <h5 class="text-center card-header bg-black bg-opacity-10">Indexes</h5>
             <div class="card-body p-0">
