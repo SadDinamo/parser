@@ -32,6 +32,7 @@ function getNewsUpdateStatus() {
                     if (data['yahoo_ticker_update']) {
                         document.getElementById('updating-news-wheel').classList.remove('d-none');
                         document.getElementById('updating-news-label').classList.remove('d-none');
+                        document.getElementById('updating-news-rerun-button').classList.remove('d-none');
                         document.getElementById('updating-news-label').classList.add('d-inline');
                         document.getElementById('updating-news-label').innerText = 'News update ' +
                             data['current_ticker_counter'].toString() + ' of ' + data['total_tickers'].toString();
@@ -42,6 +43,7 @@ function getNewsUpdateStatus() {
                         document.getElementById('updating-news-wheel').classList.add('d-none');
                         document.getElementById('updating-news-label').classList.remove('d-inline');
                         document.getElementById('updating-news-label').classList.add('d-none');
+                        document.getElementById('updating-news-rerun-button').classList.add('d-none');
                         document.getElementById('updating-news-label').innerText = '';
                     }
                 } else {

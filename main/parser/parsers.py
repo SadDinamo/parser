@@ -19,8 +19,11 @@ HEADERS_CNN = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 YaBrowser/22.11.0.2500 Yowser/2.5 Safari/537.36',
     'accept': '*/*',
     'sec-ch-ua-platform': 'Windows',
-    'sec-fetch-site': 'cross-site',
-    'sec-fetch-mode': 'cors'
+}
+
+HEADERS_TIPRANKS = {
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 YaBrowser/23.3.4.603 Yowser/2.5 Safari/537.36',
+    'accept': '*/*',
 }
 
 
@@ -137,6 +140,32 @@ def getCnnFearAndGreedStats(request):
     return JsonResponse(result)
 
 
+def get_tipranks_report_dates(request, ticker):
+    url = 'https://www.tipranks.com/stocks/'+ticker+'/earnings'
+    s = requests.Session()
+    retries = Retry(total=5,
+                    backoff_factor=0.5,
+                    status_forcelist=[500, 502, 503, 504])
+    s.mount(url, HTTPAdapter(max_retries=retries))
+    html = s.get(url, headers=HEADERS_TIPRANKS, timeout=15)
+    if html.status_code == 200:  # success
+        bs_content = BeautifulSoup(html.text, 'html.parser')
+        div = bs_content.findAll('div', attrs={'data-s': 'fundamentals'})[0]
+        sub_div = div.findAll('div', attrs={'class': 'flexc_c displayflex mb4'})[0]
+        next_report_date = sub_div.findAll('span', attrs={'class': 'fonth5_bold mt3'})[0].text
+        sub_div = div.find_all('div', attrs={'class': 'flexc_c displayflex mb4'})[2]
+        consensus_eps_forecast = sub_div.findAll('span', attrs={'class': 'fonth5_bold mt3'})[0].text
+        sub_div = div.find_all('div', attrs={'class': 'flexc_c displayflex mb4'})[4]
+        analyst_consensus = sub_div.findAll('span')[1].text
+        result = {"next_report_date": next_report_date,
+                  "consensus_eps_forecast": consensus_eps_forecast,
+                  "analyst_consensus": analyst_consensus}
+    else:
+        result = html.content
+    return JsonResponse(result)
+
+
+
 def getFinvizFuturesData(request):
     url = 'https://finviz.com/api/futures_all.ashx?timeframe=d1'
     s = requests.Session()
@@ -144,7 +173,7 @@ def getFinvizFuturesData(request):
                     backoff_factor=0.5,
                     status_forcelist=[500, 502, 503, 504])
     s.mount(url, HTTPAdapter(max_retries=retries))
-    html = s.get(url, headers=HEADERS_CNN, timeout=5)
+    html = s.get(url, headers=HEADERS, timeout=5)
     if html.status_code == 200:  # success
         bs_content = BeautifulSoup(html.text, 'html.parser')
         result = json.loads(bs_content.text)

@@ -15,6 +15,7 @@ from django.core.paginator import Paginator, EmptyPage
 from django.core import serializers
 from django.http import JsonResponse
 from .tks import *
+from django.views.decorators.csrf import csrf_exempt
 
 TOKEN = os.environ['INVEST_TOKEN']
 
@@ -123,6 +124,12 @@ def get_finviz_futures_data(request):
 
 def get_finviz_crypto_data(request):
     result = getFinvizCrypto(request)
+    return result
+
+
+@csrf_exempt
+def get_tipranks_data(request, ticker):
+    result = get_tipranks_report_dates(request, ticker)
     return result
 
 
