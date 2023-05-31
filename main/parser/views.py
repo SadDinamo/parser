@@ -29,7 +29,8 @@ def welcome_screen(request):
     fails_to_deliver = getHtmlNasdaqFailsToDeliverList
     # cnn_fear_and_greed_data = getCnnFearAndGreedStats(request)
     # data = {'fails_to_deliver': fails_to_deliver, 'fear_and_greed': cnn_fear_and_greed_data}
-    data = {'fails_to_deliver': fails_to_deliver}
+    # data = {'fails_to_deliver': fails_to_deliver}
+    data = {}
     return render(request, 'parser/welcomeScreen.html', context=data)
 
 
@@ -115,6 +116,11 @@ def get_yahoo_ajax_progress_bar_data(request):
 def get_cnn_fear_and_greed_stats(request):
     result = getCnnFearAndGreedStats(request)
     return result
+
+
+def get_fail_to_deliver_list(request):
+    result = getHtmlNasdaqFailsToDeliverList()
+    return JsonResponse(result, safe=False)
 
 
 def get_finviz_futures_data(request):
@@ -235,11 +241,17 @@ def reset_to_defaults(request):
         if pref.default_value != None and pref.default_value != '':
             pref.value = pref.default_value
             pref.save()
-    if ServiceVariables.objects.filter(name='yahoo_ticker_update').first():
-        ServiceVariable = ServiceVariables.objects.filter(name='yahoo_ticker_update').first()
-        ServiceVariable.value = 'False'
-        ServiceVariable.save()
     return redirect('preferences')
+
+
+def reset_news_parser(request):
+    service_variable = ServiceVariables.objects.filter(name='yahoo_ticker_update').first()
+    service_variable.value = 'False'
+    service_variable.save()
+    current_ticker_counter = ServiceVariables.objects.filter(name='current_ticker_counter').first()
+    current_ticker_counter.value = '0'
+    current_ticker_counter.save()
+    return JsonResponse('News parser reset completed', safe=False)
 
 
 class NewsKeyWordListView(generic.ListView):

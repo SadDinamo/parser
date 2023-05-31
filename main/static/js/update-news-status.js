@@ -10,7 +10,7 @@ function launchNewsUpdateBackground() {
             success: function (data) {
             },
             error: function (request, status, error) {
-                console.log(s + ': Ajax error for launch_news_update_background: ' + xhr.status + ": " + xhr.responseText);
+                console.log(': Ajax error for launch_news_update_background: ' + xhr.status + ": " + xhr.responseText);
             },
         });
     }
@@ -57,6 +57,33 @@ function getNewsUpdateStatus() {
     }
 }
 
+function resetNewsUpdate() {
+    // Ajax
+    let s = new Date().toLocaleString();
+    if (true) {
+        $.ajax({
+            url: '/reset_news_parser',
+            method: 'POST',
+            dataType: 'json',
+            data: {},
+            headers: {"X-CSRFToken": getCookie('csrftoken')},
+            // mode: 'same-origin', // Do not send CSRF token to another domain.
+            success: function (data) {
+                if (data) {
+                    console.log(s + ': ' + data);
+                    launchNewsUpdateBackground();
+                } else {
+                    console.log(s + ": Unable to reset news update status")
+                }
+            },
+            error: function (request, status, error) {
+                console.log(s + ': Ajax error for reset news update status: ' + xhr.status + ": " + xhr.responseText);
+            },
+        });
+    }
+}
+
+document.getElementById('updating-news-rerun-button').addEventListener('click', resetNewsUpdate);
 launchNewsUpdateBackground();
 
 let interval_launchNewsUpdateBackground = 1000 * 60 * 30; // refresh data every ... milliseconds

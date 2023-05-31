@@ -18,6 +18,7 @@ urlpatterns = [
     path('preference_delete/<int:pk>/', PreferenceDelete.as_view(), name='preference_delete'),
     path('preference_check_default', check_default_preferencies, name='preference_check_default'),
     path('preferences_reset_to_defaults', reset_to_defaults, name='preferences_reset_to_defaults'),
+    path('reset_news_parser', reset_news_parser, name='reset_news_parser'),
     path('news_key_words_list', NewsKeyWordListView.as_view(), name='news_key_words_list'),
     path('news_key_words_create', NewsKeyWordsCreate.as_view(), name='news_key_words_create'),
     path('news_key_words_update/<int:pk>/', NewsKeyWordsUpdate.as_view(), name='news_key_words_update'),
@@ -32,6 +33,7 @@ urlpatterns = [
     path('get_candles', get_candles, name='get_candles'),
     path('get_calendar_events', get_calendar_events, name='get_calendar_events'),
     path('get_tipranks_data/<str:ticker>/', get_tipranks_data, name='get_tipranks_data'),
+    path('get_fail_to_deliver_list', get_fail_to_deliver_list, name='get_fail_to_deliver_list'),
     path('ttest',  ttest, name='ttest'),
 ]
 

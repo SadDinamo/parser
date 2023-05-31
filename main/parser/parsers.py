@@ -40,7 +40,6 @@ def getHtml(shareName='SAVA', params=None):
 
 def getHtmlNasdaqFailsToDeliverList(params=None):
     tickers = Share.objects.all()
-    table = []
     row = []
     url = 'https://nasdaqtrader.com/trader.aspx?id=RegSHOThreshold'
     s = requests.Session()
@@ -56,19 +55,10 @@ def getHtmlNasdaqFailsToDeliverList(params=None):
         for item in items:
             tags_td = item.find_all('td')
             if len(tags_td) > 0:
-                for tag in tags_td:
-                    row.append(str(tag))
-                    check = False
-                    for ticker in tickers:
-                        if str(row[0]) == '<td>' + ticker.ticker + '</td>':
-                            check = True
-                if check:
-                    row.append('tradable')
-                else:
-                    row.append('non-tradable')
-                table.append(row)
-                row = []
-    return table
+                for ticker in tickers:
+                    if str(tags_td[0]) == '<td>' + ticker.ticker + '</td>':
+                        row.append(ticker.ticker)
+    return row
 
 
 def getHtmlFinvizTopShorts(params=None):
@@ -254,13 +244,15 @@ def parse(request):
                                   settings.RECIPIENT_LIST,
                                   html_message=current_html,
                                   )
-
-            current_ticker_counter.value = str(int(current_ticker_counter) + 1)
-            current_ticker_counter.save()
-
-            ticker_name = ServiceVariables.objects.filter(name='ticker_name').first()
-            ticker_name.value = getTickerCode(ticker)
-            ticker_name.save()
+            current_ticker_counter_check = ServiceVariables.objects.filter(name='current_ticker_counter').first()
+            if current_ticker_counter_check.value == current_ticker_counter.value:
+                current_ticker_counter.value = str(int(current_ticker_counter) + 1)
+                current_ticker_counter.save()
+                ticker_name = ServiceVariables.objects.filter(name='ticker_name').first()
+                ticker_name.value = getTickerCode(ticker)
+                ticker_name.save()
+            else:
+                return
         else:
             print('Error on server side: ' + xml.status_code)
     yahoo_ticker_update.value = 'False'
