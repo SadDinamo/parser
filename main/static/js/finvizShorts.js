@@ -7,13 +7,26 @@ function getTipranksData(ticker) {
         method: 'POST',
         dataType: 'json',
         data: {'ticker': ticker},
-        headers: {"X-CSRFToken": getCookie('csrftoken')},
-        // mode: 'same-origin', // Do not send CSRF token to another domain.
+        headers: {"X-CSRFToken": getCookie('csrftoken')}, // mode: 'same-origin', // Do not send CSRF token to another domain.
         xhrFields: {withCredentials: true},
         success: function (data) {
             if (data) {
                 let row = document.getElementById('short-' + ticker);
                 let report_date = document.createElement('td');
+                let reportDate = new Date(data['next_report_date']);
+                let dateNow = new Date(Date.now());
+                let diff = (reportDate.getTime() - dateNow.getTime()) / 1000 / 3600 / 24;
+                if (diff < 7) {
+                    document.getElementById('short-' + ticker + '-ticker').innerHTML =
+                        document.getElementById('short-' + ticker + '-ticker').innerHTML +
+                        '<span style="position:relative">' +
+                        '<i class="bi bi-calendar text-danger-emphasis mx-1" ' +
+                        'title="report to be published soon" style="position:absolute"></i>' +
+                        '<span class="text-danger-emphasis" style="text-align:center; ' +
+                        ' font-size:75%; width:1.33em; margin-top:0.3em; margin-left:0.45em">' +
+                        + Math.floor(diff) + '</span>' +
+                        '</span>'
+                }
                 report_date.innerText = data['next_report_date'];
                 report_date.className = 'text-center';
                 row.append(report_date);
@@ -45,7 +58,8 @@ function getFinvizShorts() {
             dataType: 'json',
             data: {},
             headers: {"X-CSRFToken": getCookie('csrftoken')},
-            // mode: 'same-origin', // Do not send CSRF token to another domain.
+            // mode: 'same-origin'
+            // Do not send CSRF token to another domain
             success: function (data) {
                 if (data) {
                     let tableBody = document.getElementById('top-shorts-table-body');
@@ -59,11 +73,9 @@ function getFinvizShorts() {
                         link.setAttribute('href', 'https://www.tipranks.com/stocks/' + data[i][0] +
                             '/earnings');
                         link.id = 'short-' + data[i][0] + '-ticker';
-                        link.className = 'link-offset-1 link-offset-2-hover link-underline link-underline-opacity-0 ' +
-                            'link-underline-opacity-75-hover';
+                        link.className = 'link-underline link-underline-opacity-0 d-flex flex-row';
                         link.innerText = data[i][0];
                         cell.append(link);
-                        cell.className = 'ps-2';
                         row.append(cell);
                         let cell_short_float = document.createElement('td');
                         cell_short_float.innerText = data[i][1];
@@ -93,15 +105,11 @@ function markFailToDeliver() {
             method: 'POST',
             dataType: 'json',
             data: {},
-            headers: {"X-CSRFToken": getCookie('csrftoken')},
-            // mode: 'same-origin', // Do not send CSRF token to another domain.
+            headers: {"X-CSRFToken": getCookie('csrftoken')}, // mode: 'same-origin', // Do not send CSRF token to another domain.
             success: function (data) {
+                console.log(data);
                 if (data) {
-                    console.log(s + ': ' + data);
-                    data.forEach(element => document.getElementById('short-' + element.toString() +
-                        '-ticker').innerHTML =
-                        document.getElementById('short-' + element.toString() + '-ticker').innerHTML +
-                    '<i class="bi bi-exclamation-octagon text-warning mx-1" title="failed-to-deliver"></i>');
+                    data.forEach(element => document.getElementById('short-' + element.toString() + '-ticker').innerHTML = document.getElementById('short-' + element.toString() + '-ticker').innerHTML + '<i class="bi bi-truck text-warning mx-1" title="failed-to-deliver"></i>');
                 } else {
                     console.log(s + ": Unable to get fail to deliver list")
                 }
