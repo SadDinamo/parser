@@ -3,6 +3,7 @@
 function getCnnFearAndGreedData() {
     // Ajax
     let s = new Date().toLocaleString();
+    let toastDelay = 10000;
     if (true) {
         $.ajax({
             url: '/get_cnn_fear_and_greed_stats',
@@ -17,7 +18,7 @@ function getCnnFearAndGreedData() {
                     greedLink.setAttribute('href', 'https://edition.cnn.com/markets/fear-and-greed');
                     greedLink.setAttribute('target', '_blank');
                     greedLink.innerText = 'CNN fear and greed index';
-                    document.getElementById('cnn-fear-and-greed-name').innerHTML='';
+                    document.getElementById('cnn-fear-and-greed-name').innerHTML = '';
                     document.getElementById('cnn-fear-and-greed-name').append(greedLink);
                     document.getElementById("cnn-fear-and-greed-value").innerText =
                         '' + Math.round(data['fear_and_greed']['score']);
@@ -51,9 +52,11 @@ function getCnnFearAndGreedData() {
                     toast.append(toastHeader);
                     toast.append(toastMessage);
                     toasts.append(toast);
-                    let toastBs = new bootstrap.Toast(toast);
+                    let toastBs = new bootstrap.Toast(toast)
+                    toastBs.delay = toastDelay;
                     toastBs.show();
                     toastBs = null;
+                    setTimeout(() => {toast.remove(); toast = null; }, toastDelay + 1000);
                 } else {
                     console.log(s + ": Unable to get data for get_cnn_fear_and_greed_stats")
                 }

@@ -1,6 +1,7 @@
 function getFinvizFuturesData() {
     // Ajax
     let s = new Date().toLocaleString();
+    let toastDelay = 10000;
     if (true) {
         $.ajax({
             url: '/get_finviz_futures_data',
@@ -71,8 +72,10 @@ function getFinvizFuturesData() {
                     toast.append(toastMessage);
                     toasts.append(toast);
                     let toastBs = new bootstrap.Toast(toast);
+                    toastBs.delay = toastDelay;
                     toastBs.show();
                     toastBs = null;
+                    setTimeout(() => {toast.remove(); toast = null; }, toastDelay + 1000);
                 } else {
                     console.log(s + ": Unable to get data for get_finviz_futures_data")
                 }
@@ -85,7 +88,6 @@ function getFinvizFuturesData() {
 }
 
 getFinvizFuturesData();
-
 
 let interval_finvizFutures = 1000 * 60 * 5; // refresh data every ... milliseconds
 setInterval(() => {

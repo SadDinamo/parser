@@ -1,6 +1,7 @@
 function getFinvizCryptoData() {
     // Ajax
     let s = new Date().toLocaleString();
+    let toastDelay = 10000;
     if (true) {
         $.ajax({
             url: '/get_finviz_crypto_data',
@@ -40,8 +41,10 @@ function getFinvizCryptoData() {
                     toast.append(toastMessage);
                     toasts.append(toast);
                     let toastBs = new bootstrap.Toast(toast);
+                    toastBs.delay = toastDelay;
                     toastBs.show();
                     toastBs = null;
+                    setTimeout(() => {toast.remove(); toast = null; }, toastDelay + 1000);
                 } else {
                     console.log(s + ": Unable to get data for get_finviz_crypto_data")
                 }
