@@ -30,7 +30,8 @@
                 {% if page_obj.has_previous %}
                 <li class="page-item">
                     {% if search %}
-                    <a class="page-link" href=" {{ request.path }}?page={{ page_obj.previous_page_number }}&val={{ search }} ">&laquo</a>
+                    <a class="page-link"
+                       href=" {{ request.path }}?page={{ page_obj.previous_page_number }}&val={{ search }} ">&laquo</a>
                     {% else %}
                     <a class="page-link" href=" {{ request.path }}?page={{ page_obj.previous_page_number }} ">&laquo</a>
                     {% endif %}
@@ -80,7 +81,8 @@
                 {% if page_obj.has_next %}
                 <li class="page-item">
                     {% if search %}
-                    <a class="page-link" href=" {{ request.path }}?page={{ page_obj.next_page_number }}&val={{ search }} ">&raquo</a>
+                    <a class="page-link"
+                       href=" {{ request.path }}?page={{ page_obj.next_page_number }}&val={{ search }} ">&raquo</a>
                     {% else %}
                     <a class="page-link" href=" {{ request.path }}?page={{ page_obj.next_page_number }} ">&raquo</a>
                     {% endif %}
@@ -94,7 +96,8 @@
                 {% if page_obj.number != paginator.num_pages %}
                 <li class="page-item">
                     {% if search %}
-                    <a class="page-link" href=" {{ request.path }}?page={{ paginator.num_pages }}&val={{ search }} ">Last page</a>
+                    <a class="page-link" href=" {{ request.path }}?page={{ paginator.num_pages }}&val={{ search }} ">Last
+                        page</a>
                     {% else %}
                     <a class="page-link" href=" {{ request.path }}?page={{ paginator.num_pages }} ">Last page</a>
                     {% endif %}
@@ -110,30 +113,33 @@
         {% endif %}
         <div class="mx-0 mx-md-2"></div>
         <form class="d-flex mb-4 col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3">
-            <input class="form-control me-2" name="val" type="search" placeholder="Search by ticker or name" aria-label="Search">
+            <input class="form-control me-2" name="val" type="search" placeholder="Search by ticker or name"
+                   aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
     </div>
 </div>
 
 
-<div class="d-flex flex-wrap card-group">
+<div class="d-flex flex-wrap flex-row w-100">
     {% for share in shares %}
-    <div class="col col-12 col-md-4 col-lg-3 col-xl-2 mb-2">
-        <div class="card mx-2 border-dark h-100">
+    <div class="col col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2">
+    <a href="https://finance.yahoo.com/quote/{{ share.ticker }}.HK" target="_blank"
+       class="card mx-1 mb-2 text-decoration-none">
+        <div>
             <div class="card-header">
                 <b>{{ share.ticker }}</b><br>
                 <small>{{ share.name }}</small>
             </div>
             <div class="card-body">
-                <p class="card-text mb-0">Class-code: {{ share.class_code }}</p>
+                <p class="card-text mb-0">Country: {{ share.country_of_risk }}</p>
                 <p class="card-text mb-0">Sector: {{ share.sector}}</p>
                 <p class="card-text">Added on: {{ share.date_added}}</p>
                 <!--        <a href="#" class="btn btn-primary">Go somewhere</a>-->
             </div>
         </div>
-    </div>
+    </a>
+        </div>
     {% endfor %}
 </div>
-
 {% endblock %}

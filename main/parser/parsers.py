@@ -76,11 +76,12 @@ def getHtmlFinvizTopShorts(params=None):
         div = bs_content.find(id='screener-views-table')
         rows = div.findAll('tr', attrs={'valign': 'top'})
         for row in rows:
-            row_ticker = row.find('a', attrs={'class': 'screener-link-primary'})
+            row_ticker = row.find('a', attrs={'class': 'tab-link'})
             if tickers.filter(ticker=row_ticker.text):
-                cells = row.findAll('td', attrs={'class': 'screener-body-table-nw'})
+                cells = row.findAll('td', attrs={})
                 shorts.append([row_ticker.text, cells[9].text, cells[10].text])
     url = 'https://finviz.com/screener.ashx?v=131&f=cap_microover&o=-shortinterestshare&r=21'
+    s = requests.Session()
     retries = Retry(total=5,
                     backoff_factor=0.5,
                     status_forcelist=[500, 502, 503, 504])
@@ -91,11 +92,12 @@ def getHtmlFinvizTopShorts(params=None):
         div = bs_content.find(id='screener-views-table')
         rows = div.findAll('tr', attrs={'valign': 'top'})
         for row in rows:
-            row_ticker = row.find('a', attrs={'class': 'screener-link-primary'})
+            row_ticker = row.find('a', attrs={'class': 'tab-link'})
             if tickers.filter(ticker=row_ticker.text):
-                cells = row.findAll('td', attrs={'class': 'screener-body-table-nw'})
+                cells = row.findAll('td', attrs={})
                 shorts.append([row_ticker.text, cells[9].text, cells[10].text])
     url = 'https://finviz.com/screener.ashx?v=131&f=cap_microover&o=-shortinterestshare&r=41'
+    s = requests.Session()
     retries = Retry(total=5,
                     backoff_factor=0.5,
                     status_forcelist=[500, 502, 503, 504])
@@ -106,9 +108,9 @@ def getHtmlFinvizTopShorts(params=None):
         div = bs_content.find(id='screener-views-table')
         rows = div.findAll('tr', attrs={'valign': 'top'})
         for row in rows:
-            row_ticker = row.find('a', attrs={'class': 'screener-link-primary'})
+            row_ticker = row.find('a', attrs={'class': 'tab-link'})
             if tickers.filter(ticker=row_ticker.text):
-                cells = row.findAll('td', attrs={'class': 'screener-body-table-nw'})
+                cells = row.findAll('td', attrs={})
                 shorts.append([row_ticker.text, cells[9].text, cells[10].text])
     return shorts
 

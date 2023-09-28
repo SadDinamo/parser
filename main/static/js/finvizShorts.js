@@ -15,15 +15,16 @@ function getTipranksData(ticker) {
                 let report_date = document.createElement('td');
                 let reportDate = new Date(data['next_report_date']);
                 let dateNow = new Date(Date.now());
-                let diff = (reportDate.getTime() - dateNow.getTime()) / 1000 / 3600 / 24;
-                if (diff < 7) {
+                let diff = (reportDate.getTime() - dateNow.getTime()) / 1000 / 3600 / 24 + 1;
+                if (diff < 15) {
                     document.getElementById('short-' + ticker + '-ticker').innerHTML =
                         document.getElementById('short-' + ticker + '-ticker').innerHTML +
                         '<span style="position:relative">' +
                         '<i class="bi bi-calendar text-danger-emphasis mx-1" ' +
                         'title="report to be published soon" style="position:absolute"></i>' +
-                        '<span class="text-danger-emphasis" style="text-align:center; ' +
-                        ' font-size:75%; width:1.33em; margin-top:0.3em; margin-left:0.45em">' +
+                        '<span class="text-danger-emphasis" style="display:inline-block;' + 
+			'text-align:center;font-size:75%;width: 1.33em;margin-top:0.3em;' + 
+			'margin-left:0.33em">' +
                         + Math.floor(diff) + '</span>' +
                         '</span>'
                 }

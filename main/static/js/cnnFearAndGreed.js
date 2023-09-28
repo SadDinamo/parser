@@ -52,7 +52,7 @@ function getCnnFearAndGreedData() {
                     toast.append(toastHeader);
                     toast.append(toastMessage);
                     toasts.append(toast);
-                    let toastBs = new bootstrap.Toast(toast)
+                    let toastBs = new bootstrap.Toast(toast);
                     toastBs.delay = toastDelay;
                     toastBs.show();
                     toastBs = null;

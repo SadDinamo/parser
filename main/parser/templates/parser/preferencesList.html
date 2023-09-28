@@ -4,21 +4,30 @@
 
 {% block content %}
 
-<div id="buttonsectionwrapper" class="d-flex flex-row my-2">
-    <div>
-        <a href="{% url 'preference_create' %}" id="showModalNewPreference" class="btn btn-success mx-2">
-            <i class="fa-solid fa-sheet-plastic"></i> Add new preference
-        </a>
+<div id="buttonsectionwrapper">
+    <div class="d-flex flex-row my-2">
+        <!-- Dark/Light theme option box -->
+        <div class="form-check form-switch mx-2">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Dark theme</label>
+        </div>
     </div>
-    <div>
-        <a href="{% url 'preference_check_default' %}" class="btn btn-outline-secondary mx-2">
-            <i class="fa-solid fa-check-to-slot"></i> Check default preferencies
-        </a>
-    </div>
-    <div>
-        <a href="{% url 'preferences_reset_to_defaults' %}" class="btn btn-outline-danger mx-2">
-            <i class="fa-solid fa-recycle"></i> Reset to defaults
-        </a>
+    <div class="d-flex flex-row my-2">
+        <div>
+            <a href="{% url 'preference_create' %}" id="showModalNewPreference" class="btn btn-success mx-2">
+                <i class="fa-solid fa-sheet-plastic"></i> Add new preference
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'preference_check_default' %}" class="btn btn-outline-secondary mx-2">
+                <i class="fa-solid fa-check-to-slot"></i> Check default preferencies
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'preferences_reset_to_defaults' %}" class="btn btn-outline-danger mx-2">
+                <i class="fa-solid fa-recycle"></i> Reset to defaults
+            </a>
+        </div>
     </div>
 </div>
 
